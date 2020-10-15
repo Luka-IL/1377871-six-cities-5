@@ -8,21 +8,44 @@ import {BrowserRouter, Switch, Route} from "react-router-dom";
 
 const App = (props) => {
 
-  const {rentCount} = props;
+  const {rentCount, offers} = props;
+
 
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/">
-          <Main rentCount={rentCount} />
+        <Route exact
+          path="/"
+          render={({history}) => (
+            <Login
+              onSubmitForm={() => history.push(`/main`)}
+            />
+          )}>
         </Route>
-        <Route exact path="/login">
-          <Login />
+        <Route exact
+          path="/main"
+          render={({history}) => (
+            <Main
+              rentCount={rentCount}
+              offers={offers}
+              onOfferClick={() => history.push(`/offer/id`)}
+            />
+          )}>
         </Route>
         <Route exact path="/favorites">
-          <Favorites />
+          <Favorites
+            offers={offers}
+          />
         </Route>
-        <Route exact path="/offer/:id" component={Offer} />
+        <Route exact
+          path="/offer/:id"
+          render={({history}) => (
+            <Offer
+              offers={offers[0]}
+              onMainClick={() => history.push(`/main`)}
+            />
+          )}>
+        </Route>
       </Switch>
     </BrowserRouter>
   );
@@ -30,6 +53,7 @@ const App = (props) => {
 
 App.propTypes = {
   rentCount: PropTypes.number.isRequired,
+  offers: PropTypes.array.isRequired
 };
 
 
