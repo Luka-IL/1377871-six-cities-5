@@ -27,6 +27,9 @@ export default [
       name: `Karl`,
       super: true
     },
+    coordinates: [
+      52.3909553943508, 4.85309666406198
+    ],
     comments: [
       {
         guest: {
@@ -65,6 +68,9 @@ export default [
     price: 70,
     households: [
       `WiFi`, `Heating`, `Kitchen`, `Cable TV`, `Baby seat`, `Towels`
+    ],
+    coordinates: [
+      52.3809553943508, 4.939309666406198
     ],
     owner: {
       avatar: `${AVATAR_URL}/${Math.ceil(Math.random() * 5)}`,
@@ -110,6 +116,9 @@ export default [
     households: [
       `WiFi`, `Heating`, `Kitchen`, `Cable TV`, `Dishwasher`
     ],
+    coordinates: [
+      52.369553943508, 4.85309666406198
+    ],
     owner: {
       avatar: `${AVATAR_URL}/${Math.ceil(Math.random() * 5)}`,
       name: `Alice`,
@@ -153,6 +162,9 @@ export default [
     price: 220,
     households: [
       `WiFi`, `Heating`, `Kitchen`, `Cable TV`, `Pool`, `Coffee machine`, `Fridge`
+    ],
+    coordinates: [
+      52.3909553943508, 4.929309666406198
     ],
     owner: {
       avatar: `${AVATAR_URL}/${Math.ceil(Math.random() * 5)}`,
