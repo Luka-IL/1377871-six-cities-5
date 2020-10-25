@@ -99,12 +99,13 @@ class Main extends PureComponent {
                 <ListOffers
                   offers={offers}
                   onOfferClick={onOfferClick}
+                  activeClass={`cities__places-list`}
                 />
               </section>
               <div className="cities__right-section">
                 <section className="cities__map map">
                   <Map
-                    offers={offers}
+                    coordinates={offers.map((item) => item.coordinates)}
                   />
                 </section>
               </div>

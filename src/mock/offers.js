@@ -13,7 +13,7 @@ export default [
     ],
     title: `Beautiful & luxurious studio at great location`,
     description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua`,
-    premium: true,
+    premium: false,
     type: `apartment`,
     rating: 5,
     bedrooms: 3,
@@ -29,6 +29,11 @@ export default [
     },
     coordinates: [
       52.3909553943508, 4.85309666406198
+    ],
+    neighbourhood: [
+      [52.3909553943508, 4.85309666406198],
+      [52.3809553943508, 4.939309666406198],
+      [52.369553943508, 4.85309666406198]
     ],
     comments: [
       {
@@ -77,7 +82,12 @@ export default [
       name: `Rick`,
       super: false
     },
-    coments: [
+    neighbourhood: [
+      [52.3909553943508, 4.85309666406198],
+      [52.3809553943508, 4.939309666406198],
+      [52.369553943508, 4.85309666406198]
+    ],
+    comments: [
       {
         guest: {
           name: `Max`,
@@ -124,6 +134,11 @@ export default [
       name: `Alice`,
       super: true
     },
+    neighbourhood: [
+      [52.3909553943508, 4.85309666406198],
+      [52.3809553943508, 4.939309666406198],
+      [52.369553943508, 4.85309666406198]
+    ],
     comments: [
       {
         guest: {
@@ -171,7 +186,12 @@ export default [
       name: `Tom`,
       super: true
     },
-    coments: [
+    neighbourhood: [
+      [52.3909553943508, 4.85309666406198],
+      [52.3809553943508, 4.939309666406198],
+      [52.369553943508, 4.85309666406198]
+    ],
+    comments: [
       {
         guest: {
           name: `Max`,

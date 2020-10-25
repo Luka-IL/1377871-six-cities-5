@@ -6,21 +6,21 @@ class ListOffers extends PureComponent {
   constructor(props) {
     super(props);
 
-
     this.state = {
       active: null
     };
   }
 
   render() {
-    const {offers, onOfferClick} = this.props;
+    const {offers, onOfferClick, activeClass} = this.props;
 
     return (
-      <div className="cities__places-list places__list tabs__content">
+      <div className={`${activeClass} places__list tabs__content`}>
         {offers.map((item, i) =>
           <OfferCard
             key={`card-${i}`}
             offer={item}
+            activeClass={activeClass}
             onOfferClick={onOfferClick}
             onHoverOffer={(offer) => {
               this.setState({
@@ -36,7 +36,8 @@ class ListOffers extends PureComponent {
 
 ListOffers.propTypes = {
   offers: PropTypes.array.isRequired,
-  onOfferClick: PropTypes.func.isRequired
+  onOfferClick: PropTypes.func.isRequired,
+  activeClass: PropTypes.string.isRequired
 };
 
 export default ListOffers;

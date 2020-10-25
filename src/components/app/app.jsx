@@ -41,8 +41,10 @@ const App = (props) => {
           path="/offer/:id"
           render={({history}) => (
             <Offer
-              offers={offers[0]}
+              offer={offers[0]}
+              offers={offers}
               onMainClick={() => history.push(`/main`)}
+              onOfferClick={() => history.push(`/offer/id`)}
             />
           )}>
         </Route>

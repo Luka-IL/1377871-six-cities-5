@@ -6,11 +6,10 @@ import "leaflet/dist/leaflet.css";
 class Map extends React.Component {
   constructor(props) {
     super(props);
-    const {offers} = props;
-    this.coordinates = offers.map((item) => item.coordinates);
   }
 
   componentDidMount() {
+    const {coordinates} = this.props;
     const city = [52.38333, 4.9];
     const icon = leaflet.icon({
       iconUrl: `/img/pin.svg`,
@@ -30,7 +29,7 @@ class Map extends React.Component {
       })
       .addTo(map);
 
-    this.coordinates.forEach((item) => {
+    coordinates.forEach((item) => {
       leaflet
       .marker(item, {icon})
       .addTo(map);
@@ -44,9 +43,7 @@ class Map extends React.Component {
 }
 
 Map.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    coordinates: PropTypes.array.isRequired
-  }))
+  coordinates: PropTypes.array.isRequired
 };
 
 export default Map;
