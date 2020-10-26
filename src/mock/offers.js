@@ -13,7 +13,7 @@ export default [
         `http://farm66.static.flickr.com/65535/50440663037_e00f7f6e12_b.jpg`,
         `http://farm66.static.flickr.com/65535/50440663037_e00f7f6e12_b.jpg`
       ],
-      title: `Beautiful & luxurious studio at great location`,
+      title: `1Beautiful & luxurious studio at great location`,
       description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua`,
       premium: false,
       type: `apartment`,
@@ -65,7 +65,7 @@ export default [
         `http://farm66.static.flickr.com/65535/50440663037_e00f7f6e12_b.jpg`,
         `http://farm66.static.flickr.com/65535/50440663037_e00f7f6e12_b.jpg`
       ],
-      title: `Beautiful & luxurious studio at great location`,
+      title: `2Beautiful & luxurious studio at great location`,
       description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua`,
       premium: false,
       type: `room`,
@@ -117,7 +117,7 @@ export default [
         `http://farm66.static.flickr.com/65535/50440663037_e00f7f6e12_b.jpg`,
         `http://farm66.static.flickr.com/65535/50440663037_e00f7f6e12_b.jpg`
       ],
-      title: `Beautiful & luxurious studio at great location`,
+      title: `3Beautiful & luxurious studio at great location`,
       description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua`,
       premium: false,
       type: `apartment`,
@@ -169,7 +169,7 @@ export default [
         `http://farm66.static.flickr.com/65535/50440663037_e00f7f6e12_b.jpg`,
         `http://farm66.static.flickr.com/65535/50440663037_e00f7f6e12_b.jpg`
       ],
-      title: `Beautiful & luxurious studio at great location`,
+      title: `4Beautiful & luxurious studio at great location`,
       description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua`,
       premium: true,
       type: `hotel`,
@@ -221,7 +221,7 @@ export default [
         `http://farm66.static.flickr.com/65535/50440663037_e00f7f6e12_b.jpg`,
         `http://farm66.static.flickr.com/65535/50440663037_e00f7f6e12_b.jpg`
       ],
-      title: `Beautiful & luxurious studio at great location`,
+      title: `5Beautiful & luxurious studio at great location`,
       description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua`,
       premium: true,
       type: `house`,

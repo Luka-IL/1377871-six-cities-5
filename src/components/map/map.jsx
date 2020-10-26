@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import leaflet from "leaflet";
 import "leaflet/dist/leaflet.css";
+import {connect} from "react-redux";
 
 class Map extends React.Component {
   constructor(props) {
@@ -9,17 +10,19 @@ class Map extends React.Component {
 
     this.city = [52.38333, 4.9];
     this.zooms = 12;
+    this.icon = leaflet.icon({
+      iconUrl: `/img/pin.svg`,
+      iconSize: [30, 30]
+    });
+    this.activeIcon = leaflet.icon({
+      iconUrl: `/img/pin-active.svg`,
+      iconSize: [40, 40]
+    });
 
     this.createMap = this.createMap.bind(this);
   }
 
   createMap() {
-    const icon = leaflet.icon({
-      iconUrl: `/img/pin.svg`,
-      iconSize: [30, 30]
-    });
-    const {offers} = this.props;
-    this.coordinates = offers.map((item) => item.coordinates);
     this.map = leaflet.map(`map`, {
       center: this.city,
       zoom: this.zooms,
@@ -32,11 +35,29 @@ class Map extends React.Component {
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
       })
       .addTo(this.map);
+    this.updateLayer();
+  }
+
+  updateLayer() {
+    const {offers, active} = this.props;
+    this.coordinates = offers.map((item) => item.coordinates);
+
+    this.markers = leaflet.layerGroup();
+
+    if (active.coordinates) {
+      this.coordinates = this.coordinates.filter((item) => item !== active.coordinates);
+      const activeMarker = leaflet
+        .marker(active.coordinates, {icon: this.activeIcon});
+      this.markers.addLayer(activeMarker);
+    }
+
     this.coordinates.forEach((item) => {
-      leaflet
-      .marker(item, {icon})
-      .addTo(this.map);
+      const marker = leaflet
+      .marker(item, {icon: this.icon});
+      this.markers.addLayer(marker);
     });
+
+    this.map.addLayer(this.markers);
   }
 
   componentDidMount() {
@@ -44,8 +65,8 @@ class Map extends React.Component {
   }
 
   componentDidUpdate() {
-    this.map.remove();
-    this.createMap();
+    this.map.removeLayer(this.markers);
+    this.updateLayer();
   }
 
   render() {
@@ -56,7 +77,13 @@ class Map extends React.Component {
 }
 
 Map.propTypes = {
-  offers: PropTypes.array.isRequired
+  offers: PropTypes.array.isRequired,
+  active: PropTypes.object.isRequired
 };
 
-export default Map;
+const mapStateToProps = (state) => ({
+  active: state.active
+});
+
+export {Map};
+export default connect(mapStateToProps)(Map);

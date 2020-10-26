@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../store/action";
 
 const OfferCard = (props) => {
 
@@ -24,7 +26,7 @@ const OfferCard = (props) => {
       }}
       onMouseOut={(evt) => {
         evt.preventDefault();
-        onHoverOffer(null);
+        onHoverOffer({});
       }}
       onMouseOver={(evt) => {
         evt.preventDefault();
@@ -78,4 +80,15 @@ OfferCard.propTypes = {
   activeClass: PropTypes.string.isRequired
 };
 
-export default OfferCard;
+const mapStateToProps = (state) => ({
+  active: state.active
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onHoverOffer(offer) {
+    dispatch(ActionCreator.onHoverOffer(offer));
+  }
+});
+
+export {OfferCard};
+export default connect(mapStateToProps, mapDispatchToProps)(OfferCard);
