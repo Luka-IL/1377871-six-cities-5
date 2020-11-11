@@ -1,8 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
+import allOffers from "../../mock/offers";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../store/action";
 
-export const ListCities = (props) => {
-  const {cities, changeCity} = props;
+
+const ListCities = (props) => {
+
+  const {changeCity} = props;
+  const cities = allOffers.map((item) => item.city);
+
 
   const cityClickHandler = (evt) => {
     evt.preventDefault();
@@ -23,6 +30,14 @@ export const ListCities = (props) => {
 };
 
 ListCities.propTypes = {
-  cities: PropTypes.array.isRequired,
   changeCity: PropTypes.func.isRequired
 };
+
+const mapDispatchToProps = (dispatch) => ({
+  changeCity(city) {
+    dispatch(ActionCreator.changeCity(city));
+  },
+});
+
+export {ListCities};
+export default connect(null, mapDispatchToProps)(ListCities);

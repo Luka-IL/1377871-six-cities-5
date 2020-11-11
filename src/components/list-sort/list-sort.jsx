@@ -1,7 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../store/action";
 
-export const ListSort = (props) => {
+const ListSort = (props) => {
   const {changeSort} = props;
 
   const getSortValue = (evt) => {
@@ -22,3 +24,12 @@ export const ListSort = (props) => {
 ListSort.propTypes = {
   changeSort: PropTypes.func.isRequired
 };
+
+const mapDispatchToProps = (dispatch) => ({
+  changeSort(sort) {
+    dispatch(ActionCreator.changeSort(sort));
+  }
+});
+
+export {ListSort};
+export default connect(null, mapDispatchToProps)(ListSort);

@@ -1,17 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import ListOffers from "../list-offers/list-offers";
-import {ListSort} from "../list-sort/list-sort";
+import CitiesPlaces from "../cities-places/cities-places";
 import Map from "../map/map";
-import {connect} from "react-redux";
-import {ActionCreator} from "../../store/action";
-import {ListCities} from "../list-cities/list-cities";
-import allOffers from "../../mock/offers";
+import ListCities from "../list-cities/list-cities";
 
-const Main = (props) => {
+export const Main = (props) => {
 
-  const {offers, onOfferClick, changeCity, city, changeSort, sort} = props;
-  const cities = allOffers.map((item) => item.city);
+  const {onOfferClick} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -43,33 +38,17 @@ const Main = (props) => {
         <div className="tabs">
           <section className="locations container">
             <ListCities
-              cities={cities}
-              changeCity={changeCity}
             />
           </section>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.length} places to stay in {city}</b>
-              <form className="places__sorting" action="#" method="get">
-                <span className="places__sorting-caption">Sort by</span>
-                <ListSort
-                  changeSort={changeSort}
-                />
-              </form>
-              <ListOffers
-                offers={offers}
-                onOfferClick={onOfferClick}
-                activeClass={`cities__places-list`}
-                sort={sort}
-              />
-            </section>
+            <CitiesPlaces
+              onOfferClick={onOfferClick}
+            />
             <div className="cities__right-section">
               <section className="cities__map map">
                 <Map
-                  offers={offers}
                 />
               </section>
             </div>
@@ -82,11 +61,7 @@ const Main = (props) => {
 
 Main.propTypes = {
   rentCount: PropTypes.number.isRequired,
-  city: PropTypes.string.isRequired,
-  sort: PropTypes.string.isRequired,
   onOfferClick: PropTypes.func.isRequired,
-  changeSort: PropTypes.func.isRequired,
-  changeCity: PropTypes.func.isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape({
     pictures: PropTypes.array.isRequired,
     title: PropTypes.string.isRequired,
@@ -115,20 +90,3 @@ Main.propTypes = {
   }))
 };
 
-const mapStateToProps = (state) => ({
-  city: state.city,
-  offers: state.offers,
-  sort: state.sort,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  changeCity(city) {
-    dispatch(ActionCreator.changeCity(city));
-  },
-  changeSort(sort) {
-    dispatch(ActionCreator.changeSort(sort));
-  }
-});
-
-export {Main};
-export default connect(mapStateToProps, mapDispatchToProps)(Main);

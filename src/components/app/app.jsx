@@ -1,5 +1,5 @@
 import React from "react";
-import Main from "../main/main";
+import {Main} from "../main/main";
 import Login from "../login/login";
 import Offer from "../offer/offer";
 import Favorites from "../favorites/favorites";

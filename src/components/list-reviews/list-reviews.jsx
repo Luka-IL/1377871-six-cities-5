@@ -1,8 +1,10 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import Review from "../review/review";
-import ReviewsForm from "../reviews-form/reviews-form";
+import {Reviews} from "../reviews-form/reviews-form";
+import withReviewsForm from "../../hock/with-reviews-form/with-reviews-form";
 
+const ReviewsForm = withReviewsForm(Reviews);
 
 class ListReviews extends PureComponent {
   constructor(props) {

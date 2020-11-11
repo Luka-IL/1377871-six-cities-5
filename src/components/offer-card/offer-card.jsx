@@ -8,30 +8,24 @@ const OfferCard = (props) => {
   const {offer, onOfferClick, onHoverOffer, activeClass} = props;
   const {price, title, rating, type} = offer;
 
-  const getActiveClass = (actClass) => {
-    if (actClass === `cities__places-list`) {
-      return `cities__place-card`;
-    }
-    if (actClass === `near-places__list`) {
-      return `near-places__card`;
-    }
-    return ``;
+  const onClick = (evt) => {
+    evt.preventDefault();
+    onOfferClick();
+  };
+  const onMouseOut = (evt) => {
+    evt.preventDefault();
+    onHoverOffer({});
+  };
+  const onMouseOver = (evt) => {
+    evt.preventDefault();
+    onHoverOffer(offer);
   };
 
   return (
-    <article className={`${getActiveClass(activeClass)} place-card`}
-      onClick={(evt) => {
-        evt.preventDefault();
-        onOfferClick();
-      }}
-      onMouseOut={(evt) => {
-        evt.preventDefault();
-        onHoverOffer({});
-      }}
-      onMouseOver={(evt) => {
-        evt.preventDefault();
-        onHoverOffer(offer);
-      }}>
+    <article className={`${activeClass} place-card`}
+      onClick={onClick}
+      onMouseOut={onMouseOut}
+      onMouseOver={onMouseOver}>
       <div className="place-card__mark">
         <span>Premium</span>
       </div>
