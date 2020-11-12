@@ -29,9 +29,9 @@ CitiesPlaces.propTypes = {
   onOfferClick: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  city: state.city,
-  offers: state.offers,
+const mapStateToProps = ({DATA}) => ({
+  city: DATA.city,
+  offers: DATA.offers,
 });
 
 export {CitiesPlaces};

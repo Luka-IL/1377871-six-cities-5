@@ -29,9 +29,9 @@ ListOffers.propTypes = {
   sort: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  offers: state.offers,
-  sort: state.sort
+const mapStateToProps = ({DATA, STATE}) => ({
+  offers: DATA.offers,
+  sort: STATE.sort
 });
 
 export {ListOffers};

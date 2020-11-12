@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import allOffers from "../../mock/offers";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
 
@@ -8,7 +7,7 @@ import {ActionCreator} from "../../store/action";
 const ListCities = (props) => {
 
   const {changeCity} = props;
-  const cities = allOffers.map((item) => item.city);
+  const cities = [`Amsterdam`, `Paris`, `Cologne`, `Brussels`, `Hamburg`, `Dusseldorf`];
 
 
   const cityClickHandler = (evt) => {

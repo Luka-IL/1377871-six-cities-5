@@ -41,3 +41,25 @@ export const offersSort = (offers, type) => {
   return offers;
 };
 
+
+export const adaptToClient = (offers) => {
+  const adaptdOffers = offers.map((offer) => {
+    const adaptdOffer = Object.assign(
+        {},
+        offer,
+        {
+          favorite: offer.is_favorite,
+          premium: offer.is_premium,
+          guests: offer.max_adults,
+          image: offer.preview_image
+        }
+    );
+    delete adaptdOffer.is_favorite;
+    delete adaptdOffer.max_adults;
+    delete adaptdOffer.preview_image;
+    delete adaptdOffer.is_premium;
+
+    return adaptdOffer;
+  });
+  return adaptdOffers;
+};

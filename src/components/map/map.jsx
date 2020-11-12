@@ -40,14 +40,17 @@ class Map extends React.Component {
 
   updateLayer() {
     const {offers, active} = this.props;
-    this.coordinates = offers.map((item) => item.coordinates);
-
+    this.coordinates = offers.map((item) => [item.location.latitude, item.location.longitude]);
     this.markers = leaflet.layerGroup();
 
-    if (active.coordinates) {
-      this.coordinates = this.coordinates.filter((item) => item !== active.coordinates);
+
+    if (active.location) {
+      const activeCoordinates = [active.location.latitude, active.location.longitude];
+
+      this.coordinates = this.coordinates.filter((item) => item.toString() !== activeCoordinates.toString());
+
       const activeMarker = leaflet
-        .marker(active.coordinates, {icon: this.activeIcon});
+        .marker(activeCoordinates, {icon: this.activeIcon});
       this.markers.addLayer(activeMarker);
     }
 
@@ -81,9 +84,9 @@ Map.propTypes = {
   active: PropTypes.object.isRequired
 };
 
-const mapStateToProps = (state) => ({
-  active: state.active,
-  offers: state.offers
+const mapStateToProps = ({DATA, STATE}) => ({
+  active: STATE.active,
+  offers: DATA.offers
 });
 
 export {Map};

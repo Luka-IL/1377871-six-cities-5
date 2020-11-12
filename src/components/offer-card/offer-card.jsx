@@ -6,7 +6,7 @@ import {ActionCreator} from "../../store/action";
 const OfferCard = (props) => {
 
   const {offer, onOfferClick, onHoverOffer, activeClass} = props;
-  const {price, title, rating, type} = offer;
+  const {price, title, rating, type, premium, image} = offer;
 
   const onClick = (evt) => {
     evt.preventDefault();
@@ -26,12 +26,14 @@ const OfferCard = (props) => {
       onClick={onClick}
       onMouseOut={onMouseOut}
       onMouseOver={onMouseOver}>
-      <div className="place-card__mark">
-        <span>Premium</span>
-      </div>
+      {premium &&
+        <div className="place-card__mark">
+          <span>Premium</span>
+        </div>
+      }
       <div className="place-card__image-wrapper">
         <a href="#">
-          <img className="place-card__image" src="img/apartment-01.jpg" width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={image} width="260" height="200" alt="Place image" />
         </a>
       </div>
       <div className="place-card__info">
@@ -64,6 +66,8 @@ const OfferCard = (props) => {
 
 OfferCard.propTypes = {
   offer: PropTypes.shape({
+    image: PropTypes.string.isRequired,
+    premium: PropTypes.bool.isRequired,
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
@@ -74,8 +78,8 @@ OfferCard.propTypes = {
   activeClass: PropTypes.string.isRequired
 };
 
-const mapStateToProps = (state) => ({
-  active: state.active
+const mapStateToProps = ({DATA}) => ({
+  active: DATA.active
 });
 
 const mapDispatchToProps = (dispatch) => ({

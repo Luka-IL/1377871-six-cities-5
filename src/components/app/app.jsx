@@ -8,7 +8,7 @@ import {BrowserRouter, Switch, Route} from "react-router-dom";
 
 const App = (props) => {
 
-  const {rentCount, offers} = props;
+  const {rentCount} = props;
 
 
   return (
@@ -27,22 +27,18 @@ const App = (props) => {
           render={({history}) => (
             <Main
               rentCount={rentCount}
-              offers={offers}
               onOfferClick={() => history.push(`/offer/id`)}
             />
           )}>
         </Route>
         <Route exact path="/favorites">
           <Favorites
-            offers={offers}
           />
         </Route>
         <Route exact
           path="/offer/:id"
           render={({history}) => (
             <Offer
-              offer={offers[0]}
-              offers={offers}
               onMainClick={() => history.push(`/main`)}
               onOfferClick={() => history.push(`/offer/id`)}
             />
@@ -55,7 +51,6 @@ const App = (props) => {
 
 App.propTypes = {
   rentCount: PropTypes.number.isRequired,
-  offers: PropTypes.array.isRequired
 };
 
 
