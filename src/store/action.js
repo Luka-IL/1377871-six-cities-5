@@ -5,6 +5,8 @@ export const ActionType = {
   HOVER_OFFER: `HOVVER_OFFER`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   LOAD_OFFERS: `LOAD_OFFERS`,
+  REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
+  ADD_AUTHORIZATION_DATA: `ADD_AUTHORIZATION_DATA`
 };
 
 export const ActionCreator = {
@@ -22,10 +24,18 @@ export const ActionCreator = {
   }),
   requireAuthorization: (item) => ({
     type: ActionType.REQUIRED_AUTHORIZATION,
-    status: item,
+    authorizationStatus: item,
+  }),
+  addAuthorizationData: (item) => ({
+    type: ActionType.ADD_AUTHORIZATION_DATA,
+    email: item
   }),
   loadOffers: (item) => ({
     type: ActionType.LOAD_OFFERS,
     offers: item,
+  }),
+  redirectToRoute: (item) => ({
+    type: ActionType.REDIRECT_TO_ROUTE,
+    url: item,
   })
 };

@@ -10,11 +10,7 @@ import {createAPI} from "./services/api";
 import {ActionCreator} from "./store/action";
 import {fetchOffersList, checkAuth} from "./store/api-action";
 import {AuthorizationStatus} from "./const";
-
-
-const Settings = {
-  RENT_COUNT: 390
-};
+import {redirect} from "./store/middlewares/redirect";
 
 const api = createAPI(
     () => store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH))
@@ -23,18 +19,20 @@ const api = createAPI(
 const store = createStore(
     rootReducer,
     composeWithDevTools(
-        applyMiddleware(thunk.withExtraArgument(api))
+        applyMiddleware(thunk.withExtraArgument(api)),
+        applyMiddleware(redirect)
     )
 );
-
-store.dispatch(fetchOffersList());
-store.dispatch(checkAuth());
-
-ReactDOM.render(
-    <Provider store={store}>
-      <App
-        rentCount={Settings.RENT_COUNT}
-      />
-    </Provider>,
-    document.querySelector(`#root`)
-);
+Promise.all([
+  store.dispatch(fetchOffersList()),
+  store.dispatch(checkAuth())
+])
+.then(() => {
+  ReactDOM.render(
+      <Provider store={store}>
+        <App
+        />
+      </Provider>,
+      document.querySelector(`#root`)
+  );
+});

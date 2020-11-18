@@ -3,10 +3,11 @@ import PropTypes from "prop-types";
 import CitiesPlaces from "../cities-places/cities-places";
 import Map from "../map/map";
 import ListCities from "../list-cities/list-cities";
+import {connect} from "react-redux";
 
-export const Main = (props) => {
+const Main = (props) => {
 
-  const {onOfferClick} = props;
+  const {onOfferClick, email} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -24,7 +25,9 @@ export const Main = (props) => {
                   <a className="header__nav-link header__nav-link--profile" href="#">
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                    {email
+                      ? <span className="header__user-name user__name">{email}</span>
+                      : <span className="header__login">Sign in</span>}
                   </a>
                 </li>
               </ul>
@@ -60,33 +63,13 @@ export const Main = (props) => {
 };
 
 Main.propTypes = {
-  rentCount: PropTypes.number.isRequired,
   onOfferClick: PropTypes.func.isRequired,
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    pictures: PropTypes.array.isRequired,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    premium: PropTypes.bool.Required,
-    type: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    guests: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired,
-    households: PropTypes.array.isRequired,
-    owner: PropTypes.shape({
-      avatar: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      super: PropTypes.bool.isRequired,
-    }),
-    comments: PropTypes.arrayOf(PropTypes.shape({
-      guest: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        avatar: PropTypes.string.isRequired
-      }),
-      description: PropTypes.string.isRequired,
-      rating: PropTypes.number.isRequired,
-      date: PropTypes.string.isRequired,
-    }))
-  }))
+  email: PropTypes.string
 };
 
+const mapStateToProps = ({USER}) => ({
+  email: USER.email
+});
+
+export {Main};
+export default connect(mapStateToProps)(Main);

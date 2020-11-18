@@ -1,18 +1,18 @@
 import React from "react";
-import {Main} from "../main/main";
+import Main from "../main/main";
 import Login from "../login/login";
 import Offer from "../offer/offer";
 import Favorites from "../favorites/favorites";
 import PropTypes from "prop-types";
-import {BrowserRouter, Switch, Route} from "react-router-dom";
+import {Router as BrowserRouter, Switch, Route} from "react-router-dom";
+import PrivateRoute from "../private-route/private-route";
+import browserHistory from "../../browser-history";
 
-const App = (props) => {
 
-  const {rentCount} = props;
-
+const App = () => {
 
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact
           path="/"
@@ -26,16 +26,20 @@ const App = (props) => {
           path="/main"
           render={({history}) => (
             <Main
-              rentCount={rentCount}
               onOfferClick={() => history.push(`/offer/id`)}
             />
           )}>
         </Route>
-        <Route exact path="/favorites">
-          <Favorites
-          />
-        </Route>
-        <Route exact
+        <PrivateRoute
+          exact
+          path="/favorites"
+          render={() => {
+            return (
+              <Favorites/>
+            );
+          }}
+        />
+        <PrivateRoute exact
           path="/offer/:id"
           render={({history}) => (
             <Offer
@@ -43,14 +47,13 @@ const App = (props) => {
               onOfferClick={() => history.push(`/offer/id`)}
             />
           )}>
-        </Route>
+        </PrivateRoute>
       </Switch>
     </BrowserRouter>
   );
 };
 
 App.propTypes = {
-  rentCount: PropTypes.number.isRequired,
 };
 
 
