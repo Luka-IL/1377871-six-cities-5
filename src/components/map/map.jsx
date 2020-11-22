@@ -4,6 +4,7 @@ import leaflet from "leaflet";
 import "leaflet/dist/leaflet.css";
 import {connect} from "react-redux";
 
+
 class Map extends React.Component {
   constructor(props) {
     super(props);
@@ -74,7 +75,7 @@ class Map extends React.Component {
 
   render() {
     return (
-      <div id="map" style={{width: 100 + `%`, height: 100 + `%`}}></div>
+      <div id="map" style={{height: 100 + `%`}}></div>
     );
   }
 }

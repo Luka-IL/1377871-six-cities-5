@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should Favorites render correctly 1`] = `
+<ul
+  className="locations__list tabs__list"
+>
+  <li
+    className="locations__item"
+  >
+    <a
+      className="locations__item-link tabs__item"
+      href="#"
+      id="Amsterdam"
+      onClick={[Function]}
+    >
+      Amsterdam
+    </a>
+  </li>
+  <li
+    className="locations__item"
+  >
+    <a
+      className="locations__item-link tabs__item"
+      href="#"
+      id="Paris"
+      onClick={[Function]}
+    >
+      Paris
+    </a>
+  </li>
+  <li
+    className="locations__item"
+  >
+    <a
+      className="locations__item-link tabs__item"
+      href="#"
+      id="Cologne"
+      onClick={[Function]}
+    >
+      Cologne
+    </a>
+  </li>
+  <li
+    className="locations__item"
+  >
+    <a
+      className="locations__item-link tabs__item"
+      href="#"
+      id="Brussels"
+      onClick={[Function]}
+    >
+      Brussels
+    </a>
+  </li>
+  <li
+    className="locations__item"
+  >
+    <a
+      className="locations__item-link tabs__item"
+      href="#"
+      id="Hamburg"
+      onClick={[Function]}
+    >
+      Hamburg
+    </a>
+  </li>
+  <li
+    className="locations__item"
+  >
+    <a
+      className="locations__item-link tabs__item"
+      href="#"
+      id="Dusseldorf"
+      onClick={[Function]}
+    >
+      Dusseldorf
+    </a>
+  </li>
+</ul>
+`;

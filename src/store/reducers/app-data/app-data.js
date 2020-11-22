@@ -1,5 +1,5 @@
 import {extend, adaptToClient} from "../../../utils";
-import {getOffers} from "../../../offers";
+import {getOffersInCity} from "../../../offers";
 import {ActionType} from "../../action";
 import {AuthorizationStatus, cities} from "../../../const";
 
@@ -19,12 +19,12 @@ const appData = (state = initialState, action) => {
     case ActionType.LOAD_OFFERS:
       return extend(state, {
         allOffers: adaptToClient(action.offers),
-        offers: getOffers(adaptToClient(action.offers), cities.AMSTERDAM)
+        offers: getOffersInCity(adaptToClient(action.offers), cities.AMSTERDAM)
       });
     case ActionType.CHANGE_CITY:
       return extend(state, {
         city: action.city,
-        offers: getOffers(state.allOffers, action.city)
+        offers: getOffersInCity(state.allOffers, action.city)
       });
   }
   return state;

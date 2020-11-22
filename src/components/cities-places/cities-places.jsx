@@ -13,8 +13,7 @@ const CitiesPlaces = (props) => {
       <b className="places__found">{offers.length} places to stay in {city}</b>
       <form className="places__sorting" action="#" method="get">
         <span className="places__sorting-caption">Sort by</span>
-        <ListSort
-        />
+        <ListSort/>
       </form>
       <ListOffers
         onOfferClick={onOfferClick}

@@ -78,10 +78,6 @@ OfferCard.propTypes = {
   activeClass: PropTypes.string.isRequired
 };
 
-const mapStateToProps = ({DATA}) => ({
-  active: DATA.active
-});
-
 const mapDispatchToProps = (dispatch) => ({
   onHoverOffer(offer) {
     dispatch(ActionCreator.onHoverOffer(offer));
@@ -89,4 +85,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {OfferCard};
-export default connect(mapStateToProps, mapDispatchToProps)(OfferCard);
+export default connect(null, mapDispatchToProps)(OfferCard);

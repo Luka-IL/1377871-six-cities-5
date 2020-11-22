@@ -3,7 +3,6 @@ import Main from "../main/main";
 import Login from "../login/login";
 import Offer from "../offer/offer";
 import Favorites from "../favorites/favorites";
-import PropTypes from "prop-types";
 import {Router as BrowserRouter, Switch, Route} from "react-router-dom";
 import PrivateRoute from "../private-route/private-route";
 import browserHistory from "../../browser-history";
