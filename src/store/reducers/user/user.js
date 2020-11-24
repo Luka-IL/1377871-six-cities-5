@@ -11,11 +11,11 @@ const user = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.REQUIRED_AUTHORIZATION:
       return extend(state, {
-        authorizationStatus: action.authorizationStatus
+        authorizationStatus: action.payload
       });
     case ActionType.ADD_AUTHORIZATION_DATA:
       return extend(state, {
-        email: action.email
+        email: action.payload
       });
   }
 

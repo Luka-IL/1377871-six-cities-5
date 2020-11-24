@@ -3,11 +3,13 @@ import PropTypes from "prop-types";
 import CitiesPlaces from "../cities-places/cities-places";
 import Map from "../map/map";
 import ListCities from "../list-cities/list-cities";
+import {MainEmpty} from "../main-empty/main-empty";
 import {connect} from "react-redux";
 
 const Main = (props) => {
 
-  const {onOfferClick, email} = props;
+  const {onOfferClick, email, offers} = props;
+  const isEmpty = (offers.length > 0);
 
   return (
     <div className="page page--gray page--main">
@@ -44,19 +46,23 @@ const Main = (props) => {
             />
           </section>
         </div>
-        <div className="cities">
-          <div className="cities__places-container container">
-            <CitiesPlaces
-              onOfferClick={onOfferClick}
-            />
-            <div className="cities__right-section">
-              <section className="cities__map map">
-                <Map
-                />
-              </section>
+        {(isEmpty) ?
+          <div className="cities">
+            <div className="cities__places-container container">
+              <CitiesPlaces
+                onOfferClick={onOfferClick}
+              />
+              <div className="cities__right-section">
+                <section className="cities__map map">
+                  <Map
+                  />
+                </section>
+              </div>
             </div>
           </div>
-        </div>
+          :
+          <MainEmpty />
+        }
       </main>
     </div>
   );
@@ -64,11 +70,13 @@ const Main = (props) => {
 
 Main.propTypes = {
   onOfferClick: PropTypes.func.isRequired,
-  email: PropTypes.string
+  email: PropTypes.string,
+  offers: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = ({USER}) => ({
-  email: USER.email
+const mapStateToProps = ({USER, DATA}) => ({
+  email: USER.email,
+  offers: DATA.offers
 });
 
 export {Main};

@@ -1,3 +1,5 @@
+import {adaptToClient} from "../utils";
+
 
 export const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
@@ -10,32 +12,32 @@ export const ActionType = {
 };
 
 export const ActionCreator = {
-  changeCity: (item) => ({
+  changeCity: (city) => ({
     type: ActionType.CHANGE_CITY,
-    city: item
+    payload: city
   }),
-  changeSort: (item) => ({
+  changeSort: (sort) => ({
     type: ActionType.CHANGE_SORT,
-    sort: item
+    payload: sort
   }),
-  onHoverOffer: (item) => ({
+  onHoverOffer: (active) => ({
     type: ActionType.HOVER_OFFER,
-    active: item
+    payload: active
   }),
-  requireAuthorization: (item) => ({
+  requireAuthorization: (authorizationStatus) => ({
     type: ActionType.REQUIRED_AUTHORIZATION,
-    authorizationStatus: item,
+    payload: authorizationStatus,
   }),
-  addAuthorizationData: (item) => ({
+  addAuthorizationData: (email) => ({
     type: ActionType.ADD_AUTHORIZATION_DATA,
-    email: item
+    payload: email
   }),
-  loadOffers: (item) => ({
+  loadOffers: (offers) => ({
     type: ActionType.LOAD_OFFERS,
-    offers: item,
+    payload: adaptToClient(offers),
   }),
-  redirectToRoute: (item) => ({
+  redirectToRoute: (url) => ({
     type: ActionType.REDIRECT_TO_ROUTE,
-    url: item,
+    payload: url,
   })
 };

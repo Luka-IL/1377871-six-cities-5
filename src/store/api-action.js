@@ -4,6 +4,7 @@ import {AuthorizationStatus} from "../const";
 export const fetchOffersList = () => (dispatch, _getState, api) => (
   api.get(`/hotels`)
     .then(({data}) => dispatch(ActionCreator.loadOffers(data)))
+    .catch(({}) => dispatch(ActionCreator.loadOffers([])))
 );
 
 export const checkAuth = () => (dispatch, _getState, api) => (

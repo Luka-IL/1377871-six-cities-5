@@ -3,11 +3,14 @@ import PropTypes from "prop-types";
 import OfferCard from "../offer-card/offer-card";
 import {offersSort} from "../../utils";
 import {connect} from "react-redux";
+import {getOffersInCity} from "../../offers";
+
 
 const ListOffers = (props) => {
 
-  const {offers, onOfferClick, sort} = props;
-  const sortOffers = offersSort(offers, sort);
+  const {offers, onOfferClick, sort, city} = props;
+  const offersInCity = getOffersInCity(offers, city);
+  const sortOffers = offersSort(offersInCity, sort);
 
   return (
     <div className={`cities__places-list places__list tabs__content`}>
@@ -27,11 +30,13 @@ ListOffers.propTypes = {
   offers: PropTypes.array.isRequired,
   onOfferClick: PropTypes.func.isRequired,
   sort: PropTypes.string.isRequired,
+  city: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = ({DATA, STATE}) => ({
   offers: DATA.offers,
-  sort: STATE.sort
+  sort: STATE.sort,
+  city: DATA.city
 });
 
 export {ListOffers};

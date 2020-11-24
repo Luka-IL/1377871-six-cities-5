@@ -11,11 +11,11 @@ const appState = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.CHANGE_SORT:
       return extend(state, {
-        sort: action.sort
+        sort: action.payload
       });
     case ActionType.HOVER_OFFER:
       return extend(state, {
-        active: action.active
+        active: action.payload
       });
   }
   return state;
