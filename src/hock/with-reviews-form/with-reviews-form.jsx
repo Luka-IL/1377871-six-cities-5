@@ -9,6 +9,7 @@ const withReviewsForm = (Component) => {
       this.state = {
         rating: 0,
         comment: ``,
+        isSubmitDisabled: true
       };
       this.postComment = this.postComment.bind(this);
       this.handleFieldChange = this.handleFieldChange.bind(this);
@@ -35,11 +36,17 @@ const withReviewsForm = (Component) => {
       } else {
         this.setState({[name]: value});
       }
+      if (this.state.rating === 0 || this.state.comment.length < 50 || this.state.comment.length > 300) {
+        this.setState({isSubmitDisabled: true});
+      } else {
+        this.setState({isSubmitDisabled: false});
+      }
     }
 
     render() {
       return (
         <Component
+          isSubmitDisabled={this.state.isSubmitDisabled}
           rating={this.state.rating}
           comment={this.state.comment}
           handleSubmitForm={this.handleSubmitForm}

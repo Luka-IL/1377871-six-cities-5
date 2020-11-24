@@ -43,7 +43,15 @@ export const offersSort = (offers, type) => {
   }
   return offers;
 };
-
+export const commentsSort = (comments) => comments.sort((a, b) => {
+  if (a.date < b.date) {
+    return 1;
+  }
+  if (a.date > b.date) {
+    return -1;
+  }
+  return 0;
+});
 
 export const adaptToClient = (offers) => {
   const adaptdOffers = offers.map((offer) => {
