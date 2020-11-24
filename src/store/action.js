@@ -8,7 +8,8 @@ export const ActionType = {
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   LOAD_OFFERS: `LOAD_OFFERS`,
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
-  ADD_AUTHORIZATION_DATA: `ADD_AUTHORIZATION_DATA`
+  ADD_AUTHORIZATION_DATA: `ADD_AUTHORIZATION_DATA`,
+  LOAD_COMMENTS: `LOAD_COMMENTS`
 };
 
 export const ActionCreator = {
@@ -35,6 +36,10 @@ export const ActionCreator = {
   loadOffers: (offers) => ({
     type: ActionType.LOAD_OFFERS,
     payload: adaptToClient(offers),
+  }),
+  loadComments: (comments) => ({
+    type: ActionType.LOAD_COMMENTS,
+    payload: comments,
   }),
   redirectToRoute: (url) => ({
     type: ActionType.REDIRECT_TO_ROUTE,

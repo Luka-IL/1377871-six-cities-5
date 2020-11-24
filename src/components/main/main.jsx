@@ -5,11 +5,21 @@ import Map from "../map/map";
 import ListCities from "../list-cities/list-cities";
 import {MainEmpty} from "../main-empty/main-empty";
 import {connect} from "react-redux";
+import {ActionCreator} from "../../store/action";
 
 const Main = (props) => {
 
-  const {onOfferClick, email, offers} = props;
+  const {onOfferClick, email, offers, authorizationStatus, redirectToRoute} = props;
   const isEmpty = (offers.length > 0);
+
+  const onClickSingIn = (evt) => {
+    evt.preventDefault();
+    if (authorizationStatus === `AUTH`) {
+      redirectToRoute(`/favorite`);
+    } else {
+      redirectToRoute(`/`);
+    }
+  };
 
   return (
     <div className="page page--gray page--main">
@@ -24,7 +34,7 @@ const Main = (props) => {
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
+                  <a className="header__nav-link header__nav-link--profile" href="#" onClick={onClickSingIn}>
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
                     {email
@@ -72,12 +82,21 @@ Main.propTypes = {
   onOfferClick: PropTypes.func.isRequired,
   email: PropTypes.string,
   offers: PropTypes.array.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
+  redirectToRoute: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({USER, DATA}) => ({
   email: USER.email,
-  offers: DATA.offers
+  offers: DATA.offers,
+  authorizationStatus: USER.authorizationStatus
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  redirectToRoute(url) {
+    dispatch(ActionCreator.redirectToRoute(url))
+  }
 });
 
 export {Main};
-export default connect(mapStateToProps)(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

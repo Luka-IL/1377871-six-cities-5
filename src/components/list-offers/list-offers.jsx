@@ -39,5 +39,6 @@ const mapStateToProps = ({DATA, STATE}) => ({
   city: DATA.city
 });
 
+
 export {ListOffers};
 export default connect(mapStateToProps)(ListOffers);

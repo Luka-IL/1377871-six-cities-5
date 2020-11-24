@@ -8,15 +8,15 @@ class Review extends PureComponent {
 
   render() {
     const {review} = this.props;
-    const {guest, date, description, rating} = review;
+    const {user, date, comment, rating} = review;
     return (
       <li className="reviews__item">
         <div className="reviews__user user">
           <div className="reviews__avatar-wrapper user__avatar-wrapper">
-            <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54" alt="Reviews avatar" />
+            <img className="reviews__avatar user__avatar" src={user.avatar_url} width="54" height="54" alt="Reviews avatar" />
           </div>
           <span className="reviews__user-name">
-            {guest.name}
+            {user.name}
           </span>
         </div>
         <div className="reviews__info">
@@ -27,7 +27,7 @@ class Review extends PureComponent {
             </div>
           </div>
           <p className="reviews__text">
-            {description}
+            {comment}
           </p>
           <time className="reviews__time" dateTime={date}>{date}</time>
         </div>
@@ -39,11 +39,11 @@ class Review extends PureComponent {
 
 Review.propTypes = {
   review: PropTypes.shape({
-    guest: PropTypes.shape({
+    user: PropTypes.shape({
       name: PropTypes.string.isRequired,
-      avatar: PropTypes.string.isRequired
+      avatar_url: PropTypes.string.isRequired
     }),
-    description: PropTypes.string.isRequired,
+    comment: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
     date: PropTypes.string.isRequired
   })

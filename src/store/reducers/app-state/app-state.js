@@ -4,7 +4,8 @@ import {sortName} from "../../../const";
 
 const initialState = {
   sort: sortName.POPULAR,
-  active: {}
+  active: {},
+  comments: []
 };
 
 const appState = (state = initialState, action) => {
@@ -16,6 +17,10 @@ const appState = (state = initialState, action) => {
     case ActionType.HOVER_OFFER:
       return extend(state, {
         active: action.payload
+      });
+    case ActionType.LOAD_COMMENTS:
+      return extend(state, {
+        comments: action.payload
       });
   }
   return state;

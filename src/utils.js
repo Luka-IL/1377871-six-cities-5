@@ -5,6 +5,9 @@ export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
 
+export const randomNumber = Math.floor(Math.random() * Math.floor(100));
+
+
 export const offersSort = (offers, type) => {
   switch (type) {
     case sortName.TO_HIGH:

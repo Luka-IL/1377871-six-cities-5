@@ -7,6 +7,16 @@ export const fetchOffersList = () => (dispatch, _getState, api) => (
     .catch(({}) => dispatch(ActionCreator.loadOffers([])))
 );
 
+export const fetchCommentsList = (id) => (dispatch, _getState, api) => (
+  api.get(`/comments/${id}`)
+    .then(({data}) => dispatch(ActionCreator.loadComments(data)))
+);
+
+export const postComment = (id, comment) => (dispatch, _getState, api) => (
+  api.post(`/comments/${id}`, comment)
+  .then(({data}) => dispatch(ActionCreator.loadComments(data)))
+);
+
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(`/login`)
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH)))

@@ -15,9 +15,8 @@ const App = () => {
       <Switch>
         <Route exact
           path="/"
-          render={({history}) => (
+          render={() => (
             <Login
-              onSubmitForm={() => history.push(`/main`)}
             />
           )}>
         </Route>
@@ -25,7 +24,7 @@ const App = () => {
           path="/main"
           render={({history}) => (
             <Main
-              onOfferClick={() => history.push(`/offer/id`)}
+              onOfferClick={(url) => history.push(url)}
             />
           )}>
         </Route>
@@ -38,15 +37,16 @@ const App = () => {
             );
           }}
         />
-        <PrivateRoute exact
+        <Route exact
           path="/offer/:id"
-          render={({history}) => (
+          render={({history, match}) => (
             <Offer
+              id={match.params.id}
               onMainClick={() => history.push(`/main`)}
-              onOfferClick={() => history.push(`/offer/id`)}
+              onOfferClick={(url) => history.push(url)}
             />
           )}>
-        </PrivateRoute>
+        </Route>
       </Switch>
     </BrowserRouter>
   );

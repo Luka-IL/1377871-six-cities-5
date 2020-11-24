@@ -6,11 +6,11 @@ import {ActionCreator} from "../../store/action";
 const OfferCard = (props) => {
 
   const {offer, onOfferClick, onHoverOffer, activeClass} = props;
-  const {price, title, rating, type, premium, image} = offer;
+  const {price, title, rating, type, premium, image, id} = offer;
 
   const onClick = (evt) => {
     evt.preventDefault();
-    onOfferClick();
+    onOfferClick(`/offer/${id}`);
   };
   const onMouseOut = (evt) => {
     evt.preventDefault();
@@ -72,6 +72,8 @@ OfferCard.propTypes = {
     type: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
+
   }),
   onHoverOffer: PropTypes.func.isRequired,
   onOfferClick: PropTypes.func.isRequired,
