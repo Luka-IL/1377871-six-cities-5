@@ -53,7 +53,7 @@ export const commentsSort = (comments) => comments.sort((a, b) => {
   return 0;
 });
 
-export const adaptToClient = (offers) => {
+export const adaptOffersToClient = (offers) => {
   const adaptdOffers = offers.map((offer) => {
     const adaptdOffer = Object.assign(
         {},
@@ -74,3 +74,52 @@ export const adaptToClient = (offers) => {
   });
   return adaptdOffers;
 };
+
+export const adaptCommentToClient = (comments) => {
+  const adaptdComments = comments.map((comment) => {
+    const adaptdComment = Object.assign(
+        {},
+        comment,
+        {
+          user:
+          {
+            avatar: comment.user.avatar_url,
+            pro: comment.user.is_pro,
+            name: comment.user.name,
+            id: comment.user.id,
+
+          }
+        }
+    );
+    delete adaptdComment.avatar_url;
+    delete adaptdComment.is_pro;
+
+    return adaptdComment;
+  });
+  return adaptdComments;
+};
+
+export const formatDate = (date) => {
+  let monthNames = [
+    `January`, `February`, `March`,
+    `April`, `May`, `June`, `July`,
+    `August`, `September`, `October`,
+    `November`, `December`
+  ];
+
+  date = new Date(date);
+  let day = date.getDate();
+  let monthIndex = date.getMonth();
+  let year = date.getFullYear();
+
+  return day + ` ` + monthNames[monthIndex] + ` ` + year;
+};
+
+export const onClickSingIn = (status, redirect) => {
+  if (status === `AUTH`) {
+    redirect(`/favorites`);
+  } else {
+    redirect(`/`);
+  }
+};
+

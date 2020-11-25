@@ -55,7 +55,7 @@ ListReviews.propTypes = {
 const mapStateToProps = ({USER, STATE}) => ({
   email: USER.email,
   comments: STATE.comments,
-  authorizationStatus: STATE.authorizationStatus
+  authorizationStatus: USER.authorizationStatus
 });
 
 const mapDispatchToProps = (dispatch) => ({

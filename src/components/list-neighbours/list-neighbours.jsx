@@ -4,11 +4,11 @@ import OfferCard from "../offer-card/offer-card";
 
 export const ListNeighbours = (props) => {
 
-  const {offers, onOfferClick} = props;
+  const {neighbourhoods, onOfferClick} = props;
 
   return (
     <div className={`near-places__list places__list tabs__content`}>
-      {offers.map((item, i) =>
+      {neighbourhoods.map((item, i) =>
         <OfferCard
           key={`card-${i}`}
           offer={item}
@@ -21,7 +21,7 @@ export const ListNeighbours = (props) => {
 };
 
 ListNeighbours.propTypes = {
-  offers: PropTypes.array.isRequired,
+  neighbourhoods: PropTypes.array.isRequired,
   onOfferClick: PropTypes.func.isRequired,
 };
 

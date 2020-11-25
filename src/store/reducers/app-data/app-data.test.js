@@ -11,7 +11,6 @@ it(`Reducer without additional parameters should return initial state`, () => {
     city: `Amsterdam`,
     offers: [],
     allOffers: [],
-    authorizationStatus: `NO_AUTH`
   });
 });
 

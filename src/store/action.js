@@ -1,4 +1,4 @@
-import {adaptToClient} from "../utils";
+import {adaptOffersToClient, adaptCommentToClient} from "../utils";
 
 
 export const ActionType = {
@@ -9,7 +9,9 @@ export const ActionType = {
   LOAD_OFFERS: `LOAD_OFFERS`,
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
   ADD_AUTHORIZATION_DATA: `ADD_AUTHORIZATION_DATA`,
-  LOAD_COMMENTS: `LOAD_COMMENTS`
+  LOAD_COMMENTS: `LOAD_COMMENTS`,
+  LOAD_FAVORITES: `LOAD_FAVORITES`,
+  LOAD_NEIGHBOURHOODS: `LOAD_NEIGHBOURHOODS`
 };
 
 export const ActionCreator = {
@@ -35,14 +37,22 @@ export const ActionCreator = {
   }),
   loadOffers: (offers) => ({
     type: ActionType.LOAD_OFFERS,
-    payload: adaptToClient(offers),
+    payload: adaptOffersToClient(offers),
   }),
   loadComments: (comments) => ({
     type: ActionType.LOAD_COMMENTS,
-    payload: comments,
+    payload: adaptCommentToClient(comments),
   }),
   redirectToRoute: (url) => ({
     type: ActionType.REDIRECT_TO_ROUTE,
     payload: url,
+  }),
+  loadFavorites: (favorites) => ({
+    type: ActionType.LOAD_FAVORITES,
+    payload: favorites,
+  }),
+  loadNeighbourhoods: (neighbourhoods) => ({
+    type: ActionType.LOAD_NEIGHBOURHOODS,
+    payload: adaptOffersToClient(neighbourhoods),
   })
 };

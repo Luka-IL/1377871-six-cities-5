@@ -87,7 +87,7 @@ Map.propTypes = {
 
 const mapStateToProps = ({DATA, STATE}) => ({
   active: STATE.active,
-  offers: DATA.offers
+  offers: DATA.offers,
 });
 
 export {Map};

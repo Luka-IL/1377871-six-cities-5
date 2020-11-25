@@ -4,50 +4,40 @@ import ListReviews from "../list-reviews/list-reviews";
 import Map from "../map/map";
 import ListNeighbours from "../list-neighbours/list-neighbours";
 import {connect} from "react-redux";
-import {fetchCommentsList} from "../../store/api-action";
+import {ActionCreator} from "../../store/action";
+import Header from "../header/header";
+import {fetchCommentsList, changeFavoriteStatus, fetchNeighbourhoodsList, fetchFavoriteList} from "../../store/api-action";
 
 
 class Offer extends React.Component {
   constructor(props) {
     super(props);
+    const {id, offers, loadNeighbourhoods} = this.props;
+    this.offer = offers.filter((item) => item.id === Number(id))[0];
+    loadNeighbourhoods(id);
+
+    this.onClickFavorite = this.onClickFavorite.bind(this);
   }
 
   componentDidMount() {
     this.props.loadComments(this.props.id);
   }
 
-  componentDidUpdate() {
+  onClickFavorite(evt) {
+    evt.preventDefault();
+    const {changeFavoriteState, loadFavoritesList, id} = this.props;
+    const favoriteStatus = () => this.offer.favorite ? `0` : `1`;
+    this.offer.favorite = !this.offer.favorite;
+    changeFavoriteState(id, favoriteStatus());
+    loadFavoritesList();
   }
 
   render() {
-    const {onMainClick, onOfferClick, id, offers, comments} = this.props;
-    const offer = offers.filter((item) => item.id === Number(id))[0];
-    const {images, premium, title, rating, type, bedrooms, guests, price, goods, host} = offer;
+    const {onOfferClick, id, offers, comments, neighbourhoods} = this.props;
+    const {images, premium, title, rating, type, bedrooms, guests, price, goods, host} = this.offer;
     return (
       <div className="page">
-        <header className="header">
-          <div className="container">
-            <div className="header__wrapper">
-              <div className="header__left">
-                <a className="header__logo-link" onClick={onMainClick}>
-                  <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
-                </a>
-              </div>
-              <nav className="header__nav">
-                <ul className="header__nav-list">
-                  <li className="header__nav-item user">
-                    <a className="header__nav-link header__nav-link--profile" href="#">
-                      <div className="header__avatar-wrapper user__avatar-wrapper">
-                      </div>
-                      <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-          </div>
-        </header>
-
+        <Header />
         <main className="page__main page__main--property">
           <section className="property">
             <div className="property__gallery-container container">
@@ -70,7 +60,7 @@ class Offer extends React.Component {
                   <h1 className="property__name">
                     {title}
                   </h1>
-                  <button className="property__bookmark-button button" type="button">
+                  <button className="property__bookmark-button button" type="button" onClick={this.onClickFavorite}>
                     <svg className="property__bookmark-icon" width="31" height="33">
                       <use xlinkHref="#icon-bookmark"></use>
                     </svg>
@@ -144,7 +134,7 @@ class Offer extends React.Component {
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <ListNeighbours
-                offers={offers}
+                neighbourhoods={neighbourhoods}
                 onOfferClick={onOfferClick}
               />
             </section>
@@ -153,18 +143,25 @@ class Offer extends React.Component {
       </div>
     );
   }
-};
+}
 
 Offer.propTypes = {
   comments: PropTypes.arrayOf(PropTypes.shape({
     guest: PropTypes.shape({
       name: PropTypes.string.isRequired,
-      avatar_url: PropTypes.string.isRequired
+      avatar: PropTypes.string.isRequired
     }),
     comment: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
     date: PropTypes.string.isRequired,
   })),
+  neighbourhoods: PropTypes.array.isRequired,
+  email: PropTypes.string,
+  loadNeighbourhoods: PropTypes.func.isRequired,
+  redirectToRoute: PropTypes.func.isRequired,
+  authorizationStatus: PropTypes.string,
+  changeFavoriteState: PropTypes.func.isRequired,
+  loadFavoritesList: PropTypes.func.isRequired,
   loadComments: PropTypes.func.isRequired,
   onMainClick: PropTypes.func.isRequired,
   onOfferClick: PropTypes.func.isRequired,
@@ -175,6 +172,7 @@ Offer.propTypes = {
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     premium: PropTypes.bool.isRequired,
+    favorite: PropTypes.bool.isRequired,
     type: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
     bedrooms: PropTypes.number.isRequired,
@@ -189,14 +187,32 @@ Offer.propTypes = {
   })
 };
 
-const mapStateToProps = ({DATA, STATE}) => ({
+const mapStateToProps = ({DATA, STATE, USER}) => ({
   offers: DATA.offers,
-  comments: STATE.comments
+  neighbourhoods: DATA.neighbourhoods,
+  comments: STATE.comments,
+  authorizationStatus: USER.authorizationStatus
 });
 
 const mapDispatchToProps = (dispatch) => ({
   loadComments(id) {
     dispatch(fetchCommentsList(id));
+  },
+
+  changeFavoriteState(id, status) {
+    dispatch(changeFavoriteStatus(id, status));
+  },
+
+  loadNeighbourhoods(id) {
+    dispatch(fetchNeighbourhoodsList(id));
+  },
+
+  loadFavoritesList() {
+    dispatch(fetchFavoriteList());
+  },
+
+  redirectToRoute(url) {
+    dispatch(ActionCreator.redirectToRoute(url))
   }
 });
 

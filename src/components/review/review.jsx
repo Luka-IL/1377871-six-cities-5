@@ -1,5 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import {formatDate} from "../../utils";
 
 class Review extends PureComponent {
   constructor(props) {
@@ -9,11 +10,12 @@ class Review extends PureComponent {
   render() {
     const {review} = this.props;
     const {user, date, comment, rating} = review;
+    console.log(user.avatar)
     return (
       <li className="reviews__item">
         <div className="reviews__user user">
           <div className="reviews__avatar-wrapper user__avatar-wrapper">
-            <img className="reviews__avatar user__avatar" src={user.avatar_url} width="54" height="54" alt="Reviews avatar" />
+            <img className="reviews__avatar user__avatar" src={user.avatar} width="54" height="54" alt="Reviews avatar" />
           </div>
           <span className="reviews__user-name">
             {user.name}
@@ -29,7 +31,7 @@ class Review extends PureComponent {
           <p className="reviews__text">
             {comment}
           </p>
-          <time className="reviews__time" dateTime={date}>{date}</time>
+          <time className="reviews__time" dateTime={date}>{formatDate(date)}</time>
         </div>
       </li>
     );
@@ -41,7 +43,7 @@ Review.propTypes = {
   review: PropTypes.shape({
     user: PropTypes.shape({
       name: PropTypes.string.isRequired,
-      avatar_url: PropTypes.string.isRequired
+      avatar: PropTypes.string.isRequired
     }),
     comment: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,

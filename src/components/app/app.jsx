@@ -31,9 +31,11 @@ const App = () => {
         <PrivateRoute
           exact
           path="/favorites"
-          render={() => {
+          render={({history}) => {
             return (
-              <Favorites/>
+              <Favorites
+                onOfferClick={(url) => history.push(url)}
+              />
             );
           }}
         />
@@ -51,9 +53,5 @@ const App = () => {
     </BrowserRouter>
   );
 };
-
-App.propTypes = {
-};
-
 
 export default App;
