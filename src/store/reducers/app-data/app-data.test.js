@@ -10,34 +10,28 @@ it(`Reducer without additional parameters should return initial state`, () => {
   expect(appData(void 0, {})).toEqual({
     city: `Amsterdam`,
     offers: [],
-    allOffers: [],
+    favorites: [],
+    neighbourhoods: []
   });
 });
 
 it(`Reducer should update offers by load offers`, () => {
   expect(appData({
     offers: [],
-    allOffers: []
   }, {
     type: ActionType.LOAD_OFFERS,
-    offers: [],
-    allOffers: []
+    payload: [],
   })).toEqual({
     offers: [],
-    allOffers: []
   });
 });
 
 it(`Reducer should update offers by change city`, () => {
-  expect(appData({
-    allOffers: []
-  }, {
+  expect(appData({}, {
     type: ActionType.CHANGE_CITY,
-    city: `Amsterdam`
+    payload: `Amsterdam`
   })).toEqual({
-    city: `Amsterdam`,
-    offers: [],
-    allOffers: []
+    city: `Amsterdam`
   });
 });
 
@@ -57,7 +51,7 @@ describe(`Async operation work correctly`, () => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_OFFERS,
-          offers: [{fake: true}],
+          payload: [{fake: true}],
         });
       });
   });

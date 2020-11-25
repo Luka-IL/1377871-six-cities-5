@@ -14,7 +14,7 @@ exports[`Should Review render correctly 1`] = `
         alt="Reviews avatar"
         className="reviews__avatar user__avatar"
         height="54"
-        src="img/avatar-max.jpg"
+        src=""
         width="54"
       />
     </div>
@@ -49,14 +49,12 @@ exports[`Should Review render correctly 1`] = `
     </div>
     <p
       className="reviews__text"
-    >
-      Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, ipsum dolor sit amet
-    </p>
+    />
     <time
       className="reviews__time"
       dateTime="April 2019"
     >
-      April 2019
+      1 April 2019
     </time>
   </div>
 </li>

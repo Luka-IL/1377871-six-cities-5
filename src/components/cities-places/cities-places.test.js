@@ -10,6 +10,9 @@ const store = mockStore({
   DATA: {
     offers: [
       {
+        city: {
+          name: `Amsterdam`
+        },
         title: `1Beautiful & luxurious studio at great location`,
         premium: false,
         type: `apartment`,
@@ -17,6 +20,9 @@ const store = mockStore({
         rating: 4,
         image: ``
       }, {
+        city: {
+          name: `Amsterdam`
+        },
         title: `2Beautiful & luxurious studio at great location`,
         premium: false,
         type: `room`,
@@ -29,6 +35,9 @@ const store = mockStore({
   },
   STATE: {
     sort: `popular`
+  },
+  USER: {
+    authorizationStatus: `AUTH`
   }
 });
 

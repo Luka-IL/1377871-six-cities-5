@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import leaflet from "leaflet";
 import "leaflet/dist/leaflet.css";
 import {connect} from "react-redux";
+import {getOffersInCity} from "../../offers";
 
 
 class Map extends React.Component {
@@ -17,7 +18,7 @@ class Map extends React.Component {
     });
     this.activeIcon = leaflet.icon({
       iconUrl: `/img/pin-active.svg`,
-      iconSize: [40, 40]
+      iconSize: [30, 30]
     });
 
     this.createMap = this.createMap.bind(this);
@@ -30,7 +31,9 @@ class Map extends React.Component {
       zoomControl: false,
       marker: true
     });
+
     this.map.setView(this.city, this.zooms);
+
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
@@ -40,10 +43,17 @@ class Map extends React.Component {
   }
 
   updateLayer() {
-    const {offers, active} = this.props;
-    this.coordinates = offers.map((item) => [item.location.latitude, item.location.longitude]);
+    const {offers, active, city} = this.props;
+    const offersCity = getOffersInCity(offers, city);
+
+    this.coordinates = offersCity.map((item) => [item.location.latitude, item.location.longitude]);
     this.markers = leaflet.layerGroup();
 
+    if (offersCity[0]) {
+      const location = offersCity[0].city.location;
+      const newCenter = [location.latitude, location.longitude];
+      this.map.setView(newCenter, this.zooms);
+    }
 
     if (active.location) {
       const activeCoordinates = [active.location.latitude, active.location.longitude];
@@ -81,13 +91,14 @@ class Map extends React.Component {
 }
 
 Map.propTypes = {
+  city: PropTypes.string.isRequired,
   offers: PropTypes.array.isRequired,
   active: PropTypes.object.isRequired
 };
 
 const mapStateToProps = ({DATA, STATE}) => ({
   active: STATE.active,
-  offers: DATA.offers,
+  city: DATA.city
 });
 
 export {Map};

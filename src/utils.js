@@ -122,4 +122,18 @@ export const onClickSingIn = (status, redirect) => {
     redirect(`/`);
   }
 };
-
+/*
+export const getLocationCity = (city) => {
+  switch (city) {
+    case cities.AMSTERDAM:
+      return {
+        name: cities.AMSTERDAM,
+        location: [52.37454, 4.897976]
+      };
+    case cities.BRUSSELS:
+      return {
+        name: cities.AMSTERDAM,
+        location: [52.37454, 4.897976]
+      };
+  }
+}*/

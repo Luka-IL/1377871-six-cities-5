@@ -3,12 +3,12 @@
 exports[`Should OfferCard render correctly 1`] = `
 <article
   className=" place-card"
-  onClick={[Function]}
   onMouseOut={[Function]}
   onMouseOver={[Function]}
 >
   <div
     className="place-card__image-wrapper"
+    onClick={[Function]}
   >
     <a
       href="#"
@@ -50,6 +50,7 @@ exports[`Should OfferCard render correctly 1`] = `
         <svg
           className="place-card__bookmark-icon"
           height="19"
+          onClick={[Function]}
           width="18"
         >
           <use
@@ -85,6 +86,7 @@ exports[`Should OfferCard render correctly 1`] = `
     </div>
     <h2
       className="place-card__name"
+      onClick={[Function]}
     >
       <a
         href="#"

@@ -60,7 +60,7 @@ const mapStateToProps = ({USER}) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   redirectToRoute(url) {
-    dispatch(ActionCreator.redirectToRoute(url))
+    dispatch(ActionCreator.redirectToRoute(url));
   }
 });
 

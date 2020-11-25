@@ -7,7 +7,8 @@ configure({adapter: new Adapter()});
 
 const AVATAR_URL = `https://api.adorable.io/avatars`;
 const offers = [{
-  pictures: [
+  id: 2,
+  images: [
     `http://farm66.static.flickr.com/65535/50440663037_e00f7f6e12_b.jpg`,
     `http://farm66.static.flickr.com/65535/50440663037_e00f7f6e12_b.jpg`,
     `http://farm66.static.flickr.com/65535/50440663037_e00f7f6e12_b.jpg`,
@@ -23,10 +24,10 @@ const offers = [{
   bedrooms: 3,
   guests: 4,
   price: 20,
-  households: [
+  goods: [
     `WiFi`, `Heating`, `Kitchen`, `Cable TV`
   ],
-  owner: {
+  host: {
     avatar: `${AVATAR_URL}/3}`,
     name: `Karl`,
     super: true
@@ -61,7 +62,7 @@ const offers = [{
 }];
 
 const offer = {
-  pictures: [
+  images: [
     `http://farm66.static.flickr.com/65535/50440663037_e00f7f6e12_b.jpg`,
     `http://farm66.static.flickr.com/65535/50440663037_e00f7f6e12_b.jpg`,
     `http://farm66.static.flickr.com/65535/50440663037_e00f7f6e12_b.jpg`,
@@ -120,13 +121,28 @@ jest.mock(`../list-neighbours/list-neighbours`, () => `ListNeighbours`);
 it(`Click by main link calls callback`, () => {
   const handleMainClick = jest.fn();
   const handleOfferClick = jest.fn();
+  const handleLoadNeighbourhoods = jest.fn();
+  const handleLoadComments = jest.fn();
+  const handleChangeFavoriteState = jest.fn();
+  const handleLoadFavoritesList = jest.fn();
+
+  const mockEvent = {
+    preventDefault() {}
+  };
+
+
   const wrapper = shallow(<Offer
+    loadNeighbourhoods={handleLoadNeighbourhoods}
     onOfferClick={handleOfferClick}
     onMainClick={handleMainClick}
+    loadComments={handleLoadComments}
+    changeFavoriteState={handleChangeFavoriteState}
+    loadFavoritesList={handleLoadFavoritesList}
     offers={offers}
-    offer={offer}>
+    offer={offer}
+    id={2}>
   </Offer>);
 
-  wrapper.find(`.header__logo-link`).simulate(`click`);
-  expect(handleMainClick).toHaveBeenCalledTimes(1);
+  wrapper.find(`.property__bookmark-button`).simulate(`click`, mockEvent);
+  expect(handleChangeFavoriteState).toHaveBeenCalledTimes(1);
 });

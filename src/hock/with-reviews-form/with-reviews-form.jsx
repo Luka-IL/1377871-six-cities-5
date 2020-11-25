@@ -18,6 +18,9 @@ const withReviewsForm = (Component) => {
 
     handleSubmitForm(evt) {
       evt.preventDefault();
+      this.setState({
+        isSubmitDisabled: true
+      });
       const {rating, comment} = this.state;
       this.postComment(this.props.id, {
         rating,
@@ -25,7 +28,7 @@ const withReviewsForm = (Component) => {
       });
       this.setState({
         rating: 0,
-        comment: ``
+        comment: ``,
       });
     }
 

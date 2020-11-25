@@ -13,6 +13,7 @@ const MockComponentWrapped = withReviewsForm(MockComponent);
 it(`WithReviewsForm is rendered correctly`, () => {
   const tree = renderer.create((
     <MockComponentWrapped
+      postComment={() => {}}
     />
   ), {
     createNodeMock() {

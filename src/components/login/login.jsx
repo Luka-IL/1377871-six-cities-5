@@ -52,7 +52,7 @@ class Login extends PureComponent {
                     type="password"
                     name="password"
                     placeholder="Password"
-                    required=""
+                    required minLength={1}
                   />
                 </div>
                 <button className="login__submit form__submit button" type="submit">Sign in</button>

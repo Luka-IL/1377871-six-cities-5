@@ -34,6 +34,9 @@ const store = mockStore({
         price: 20,
         rating: 4
       },
+  },
+  USER: {
+    authorizationStatus: `AUTH`
   }
 });
 
@@ -42,7 +45,7 @@ it(`Should ListNeighbours render correctly`, () => {
     .create((
       <Provider store={store}>
         <ListNeighbours
-          offers={offers}
+          neighbourhoods={offers}
           onOfferClick={() => {}}
         >
           <React.Fragment />

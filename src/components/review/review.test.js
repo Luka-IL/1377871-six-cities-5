@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import Review from "./review";
 
 const review = {
-  guest: {
+  user: {
     name: `Max`,
     avatar: ``
   },

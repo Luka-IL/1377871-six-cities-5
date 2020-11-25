@@ -9,8 +9,11 @@ const MockComponent = () => <div />;
 const MockComponentWrapped = withReviewsForm(MockComponent);
 
 it(`Should return state`, () => {
-  const wrapper = shallow(<MockComponentWrapped />);
+  const wrapper = shallow(
+      <MockComponentWrapped
+        postComment={() => {}}
+      />);
 
-  expect(wrapper.state().review).toEqual(``);
+  expect(wrapper.state().comment).toEqual(``);
   expect(wrapper.state().rating).toEqual(0);
 });

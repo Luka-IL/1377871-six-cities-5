@@ -65,17 +65,16 @@ it(`Click by main link calls callback`, () => {
     preventDefault() {}
   };
 
-  const wrapper = shallow(<OfferCard
-    onOfferClick={handleOfferClick}
-    onHoverOffer={handleHoverOffer}
-    offer={offer}
-    activeClass={``}>
-  </OfferCard>);
+  const wrapper = shallow(
+      <OfferCard
+        onOfferClick={handleOfferClick}
+        onHoverOffer={handleHoverOffer}
+        offer={offer}
+        activeClass={``}>
+      </OfferCard>);
 
-  wrapper.find(`.place-card`).simulate(`click`, mockEvent);
-  wrapper.find(`.place-card`).simulate(`mouseover`, mockEvent);
+  wrapper.find(`.place-card__image-wrapper`).simulate(`click`, mockEvent);
 
   expect(handleOfferClick).toHaveBeenCalledTimes(1);
-  expect(handleHoverOffer).toHaveBeenCalledTimes(1);
 
 });

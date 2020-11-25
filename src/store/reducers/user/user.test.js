@@ -11,7 +11,7 @@ it(`Reducer without additional parameters should return initial state`, () => {
 it(`Reducer should update authorization status by login`, () => {
   expect(user({}, {
     type: ActionType.REQUIRED_AUTHORIZATION,
-    authorizationStatus: `AUTH`
+    payload: `AUTH`
   })).toEqual({
     authorizationStatus: `AUTH`
   });
@@ -20,7 +20,7 @@ it(`Reducer should update authorization status by login`, () => {
 it(`Reducer should update authorization data by login`, () => {
   expect(user({}, {
     type: ActionType.ADD_AUTHORIZATION_DATA,
-    email: `der@mail.ru`
+    payload: `der@mail.ru`
   })).toEqual({
     email: `der@mail.ru`
   });

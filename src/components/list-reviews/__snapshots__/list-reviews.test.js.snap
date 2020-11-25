@@ -30,7 +30,7 @@ exports[`Should Favorites render correctly 1`] = `
             alt="Reviews avatar"
             className="reviews__avatar user__avatar"
             height="54"
-            src="img/avatar-max.jpg"
+            src="https://api.adorable.io/avatars/3}"
             width="54"
           />
         </div>
@@ -65,14 +65,12 @@ exports[`Should Favorites render correctly 1`] = `
         </div>
         <p
           className="reviews__text"
-        >
-          Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, ipsum dolor sit amet
-        </p>
+        />
         <time
           className="reviews__time"
           dateTime="April 2019"
         >
-          April 2019
+          1 April 2019
         </time>
       </div>
     </li>
@@ -89,7 +87,7 @@ exports[`Should Favorites render correctly 1`] = `
             alt="Reviews avatar"
             className="reviews__avatar user__avatar"
             height="54"
-            src="img/avatar-max.jpg"
+            src="https://api.adorable.io/avatars/2}"
             width="54"
           />
         </div>
@@ -124,14 +122,12 @@ exports[`Should Favorites render correctly 1`] = `
         </div>
         <p
           className="reviews__text"
-        >
-          Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, ipsum dolor sit amet
-        </p>
+        />
         <time
           className="reviews__time"
           dateTime="April 2019"
         >
-          April 2019
+          1 April 2019
         </time>
       </div>
     </li>
@@ -152,6 +148,7 @@ exports[`Should Favorites render correctly 1`] = `
       className="reviews__rating-form form__rating"
     >
       <input
+        checked={false}
         className="form__rating-input visually-hidden"
         id="5-stars"
         name="rating"
@@ -175,6 +172,7 @@ exports[`Should Favorites render correctly 1`] = `
         </svg>
       </label>
       <input
+        checked={false}
         className="form__rating-input visually-hidden"
         id="4-stars"
         name="rating"
@@ -198,6 +196,7 @@ exports[`Should Favorites render correctly 1`] = `
         </svg>
       </label>
       <input
+        checked={false}
         className="form__rating-input visually-hidden"
         id="3-stars"
         name="rating"
@@ -221,6 +220,7 @@ exports[`Should Favorites render correctly 1`] = `
         </svg>
       </label>
       <input
+        checked={false}
         className="form__rating-input visually-hidden"
         id="2-stars"
         name="rating"
@@ -244,6 +244,7 @@ exports[`Should Favorites render correctly 1`] = `
         </svg>
       </label>
       <input
+        checked={false}
         className="form__rating-input visually-hidden"
         id="1-star"
         name="rating"
@@ -270,9 +271,10 @@ exports[`Should Favorites render correctly 1`] = `
     <textarea
       className="reviews__textarea form__textarea"
       id="review"
-      name="review"
+      name="comment"
       onChange={[Function]}
       placeholder="Tell how was your stay, what you like and what can be improved"
+      value=""
     />
     <div
       className="reviews__button-wrapper"
@@ -296,7 +298,7 @@ exports[`Should Favorites render correctly 1`] = `
       </p>
       <button
         className="reviews__submit form__submit button"
-        disabled=""
+        disabled={true}
         type="submit"
       >
         Submit

@@ -12,10 +12,8 @@ import {fetchCommentsList, changeFavoriteStatus, fetchNeighbourhoodsList, fetchF
 class Offer extends React.Component {
   constructor(props) {
     super(props);
-    const {id, offers, loadNeighbourhoods} = this.props;
-    this.offer = offers.filter((item) => item.id === Number(id))[0];
+    const {id, loadNeighbourhoods} = this.props;
     loadNeighbourhoods(id);
-
     this.onClickFavorite = this.onClickFavorite.bind(this);
   }
 
@@ -33,8 +31,9 @@ class Offer extends React.Component {
   }
 
   render() {
-    const {onOfferClick, id, offers, comments, neighbourhoods} = this.props;
-    const {images, premium, title, rating, type, bedrooms, guests, price, goods, host} = this.offer;
+    const {onOfferClick, id, comments, neighbourhoods, offers} = this.props;
+    this.offer = offers.filter((item) => item.id === Number(id))[0];
+    const {title, rating, type, bedrooms, guests, price, goods, host, images, premium} = this.offer;
     return (
       <div className="page">
         <Header />
@@ -103,7 +102,7 @@ class Offer extends React.Component {
                   <h2 className="property__host-title">Meet the host</h2>
                   <div className="property__host-user user">
                     <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                      <img className="property__avatar user__avatar" src={host.avatar_url} width="74" height="74" alt="Host avatar" />
+                      <img className="property__avatar user__avatar" src={host.avatar} width="74" height="74" alt="Host avatar" />
                     </div>
                     <span className="property__user-name">
                       {host.name}
@@ -126,7 +125,7 @@ class Offer extends React.Component {
             </div>
             <section className="cities__map map" style={{width: 40 + `em`, height: 20 + `em`, margin: `auto`}}>
               <Map
-                offers={offers}
+                offers={neighbourhoods}
               />
             </section>
           </section>
@@ -195,10 +194,6 @@ const mapStateToProps = ({DATA, STATE, USER}) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loadComments(id) {
-    dispatch(fetchCommentsList(id));
-  },
-
   changeFavoriteState(id, status) {
     dispatch(changeFavoriteStatus(id, status));
   },
@@ -212,8 +207,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
 
   redirectToRoute(url) {
-    dispatch(ActionCreator.redirectToRoute(url))
-  }
+    dispatch(ActionCreator.redirectToRoute(url));
+  },
+
+  loadComments(id) {
+    dispatch(fetchCommentsList(id));
+  },
 });
 
 export {Offer};
