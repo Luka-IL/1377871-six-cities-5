@@ -16,7 +16,7 @@ describe(`Action creators work correctly`, () => {
   });
 
   it(`Action creator creator on hover offer return active offer`, () => {
-    expect(ActionCreator.onHoverOffer({})).toEqual({
+    expect(ActionCreator.activateOffer({})).toEqual({
       type: ActionType.HOVER_OFFER,
       payload: {}
     });

@@ -56,10 +56,10 @@ class Offer extends PureComponent {
             </div>
             <div className="property__container container">
               <div className="property__wrapper">
-                {!premium ? `` :
-                  <div className="property__mark" premium>
+                {premium ?
+                  <div className="property__mark">
                     <span>Premium</span>
-                  </div>
+                  </div> : ``
                 }
                 <div className="property__name-wrapper">
                   <h1 className="property__name">

@@ -68,7 +68,7 @@ it(`Click by main link calls callback`, () => {
   const wrapper = shallow(
       <OfferCard
         onOfferClick={handleOfferClick}
-        onHoverOffer={handleHoverOffer}
+        activateOffer={handleHoverOffer}
         offer={offer}
         activeClass={``}>
       </OfferCard>);

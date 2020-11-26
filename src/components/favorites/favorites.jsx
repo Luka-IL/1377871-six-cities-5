@@ -7,7 +7,7 @@ import {ActionCreator} from "../../store/action"
 
 const Favorites = (props) => {
 
-  const {offers, onOfferClick, changeCity} = props;
+  const {offers, onOfferClick, changeCity, activateOffer} = props;
   const favoriteOffers = offers.filter((item) => (item.favorite));
 
   return (
@@ -21,6 +21,7 @@ const Favorites = (props) => {
               <ul className="favorites__list">
                 {favoriteOffers.map((item, i) => (
                   <FavoriteCard
+                    activateOffer={activateOffer}
                     onOfferClick={onOfferClick}
                     offer={item}
                     key={i}
@@ -52,6 +53,7 @@ const Favorites = (props) => {
 Favorites.propTypes = {
   onOfferClick: PropTypes.func.isRequired,
   changeCity: PropTypes.func.isRequired,
+  activateOffer: PropTypes.func.isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
@@ -68,6 +70,9 @@ const mapStateToProps = ({DATA}) => ({
 const mapDispatchToProps = (dispatch) => ({
   changeCity(city) {
     dispatch(ActionCreator.changeCity(city));
+  },
+  activateOffer(offer) {
+    dispatch(ActionCreator.activateOffer(offer))
   }
 });
 

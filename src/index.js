@@ -11,6 +11,8 @@ import {ActionCreator} from "./store/action";
 import {fetchOffersList, checkAuth, fetchFavoriteList} from "./store/api-action";
 import {AuthorizationStatus} from "./const";
 import {redirect} from "./store/middlewares/redirect";
+import "leaflet/dist/leaflet.css";
+
 
 const api = createAPI(
     () => store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH))

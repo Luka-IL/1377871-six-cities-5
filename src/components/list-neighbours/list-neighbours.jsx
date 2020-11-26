@@ -14,7 +14,7 @@ export const ListNeighbours = (props) => {
           offer={item}
           activeClass={`near-places__card`}
           onOfferClick={onOfferClick}
-          activeHover={false}
+          activeOffer={false}
         />
       )}
     </div>

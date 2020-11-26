@@ -51,7 +51,7 @@ describe(`Async operation work correctly`, () => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_OFFERS,
-          payload: [{fake: true}],
+          payload: [],
         });
       });
   });

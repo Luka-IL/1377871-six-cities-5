@@ -7,21 +7,21 @@ import {changeFavoriteStatus, fetchFavoriteList} from "../../store/api-action";
 
 const OfferCard = (props) => {
 
-  const {offer, onOfferClick, onHoverOffer, activeClass, activeHover, redirectToRoute, changeFavoriteState, loadFavoritesList, authorizationStatus} = props;
+  const {offer, onOfferClick, activateOffer, activeClass, activeOffer, redirectToRoute, changeFavoriteState, loadFavoritesList, authorizationStatus} = props;
   const {price, title, rating, type, premium, image, id} = offer;
 
   const onClick = (evt) => {
     evt.preventDefault();
-    onHoverOffer(offer);
+    activateOffer(offer);
     onOfferClick(`/offer/${id}`);
   };
   const onMouseOut = (evt) => {
     evt.preventDefault();
-    onHoverOffer({});
+    activateOffer({});
   };
   const onMouseOver = (evt) => {
     evt.preventDefault();
-    onHoverOffer(offer);
+    activateOffer(offer);
   };
   const onClickFavorite = (evt) => {
     evt.preventDefault();
@@ -37,8 +37,8 @@ const OfferCard = (props) => {
 
   return (
     <article className={`${activeClass} place-card`}
-      onMouseOut={activeHover ? onMouseOut : () => {}}
-      onMouseOver={activeHover ? onMouseOver : () => {}}>
+      onMouseOut={activeOffer ? onMouseOut : () => {}}
+      onMouseOver={activeOffer ? onMouseOver : () => {}}>
       {premium &&
         <div className="place-card__mark">
           <span>Premium</span>
@@ -95,8 +95,8 @@ OfferCard.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
   changeFavoriteState: PropTypes.func.isRequired,
   loadFavoritesList: PropTypes.func.isRequired,
-  activeHover: PropTypes.bool.isRequired,
-  onHoverOffer: PropTypes.func.isRequired,
+  activeOffer: PropTypes.bool.isRequired,
+  activateOffer: PropTypes.func.isRequired,
   onOfferClick: PropTypes.func.isRequired,
   activeClass: PropTypes.string.isRequired
 };
@@ -109,8 +109,8 @@ const mapDispatchToProps = (dispatch) => ({
   redirectToRoute(url) {
     dispatch(ActionCreator.redirectToRoute(url));
   },
-  onHoverOffer(offer) {
-    dispatch(ActionCreator.onHoverOffer(offer));
+  activateOffer(offer) {
+    dispatch(ActionCreator.activateOffer(offer));
   },
 
   changeFavoriteState(id, status) {

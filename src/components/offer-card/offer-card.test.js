@@ -18,7 +18,7 @@ const offer = {
 it(`Should OfferCard render correctly`, () => {
   const tree = renderer
     .create(<OfferCard
-      onHoverOffer={() => {}}
+      activateOffer={() => {}}
       onOfferClick={() => {}}
       offer={offer}
       activeClass={``}

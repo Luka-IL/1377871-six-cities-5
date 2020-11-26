@@ -4,70 +4,65 @@ import {Map} from "./map";
 
 const offers = [
   {
-    id: 1,
+    bedrooms: 3,
     city: {
-      name: `Amsterdam`
+      location: {
+        latitude: 52.37454,
+        longitude: 4.897976,
+        zoom: 13
+      },
     },
-    title: `1Beautiful & luxurious studio at great location`,
-    premium: false,
-    type: `apartment`,
-    price: 20,
-    rating: 4,
-    image: ``,
-    images: [],
-    goods: [],
+    name: `Amsterdam`,
     host: {
-      avatar: ``,
-      name: ``
-    }
-
-  }, {
-    id: 1,
-    city: {
-      name: `Amsterdam`
+      avatar: `img/avatar-angelina.jpg`,
+      id: 25,
+      name: `Angelina`,
+      pro: true,
     },
-    title: `2Beautiful & luxurious studio at great location`,
-    premium: false,
-    type: `room`,
-    price: 70,
-    rating: 4,
-    image: ``,
-    images: [],
-    goods: [],
-    host: {
-      avatar: ``,
-      name: ``
-    }
+    id: 4,
+    location: {
+      latitude: 52.385540000000006,
+      longitude: 4.902976,
+      zoom: 16,
+    },
   }
 ];
 
 const active = {
-  id: 1,
+  bedrooms: 3,
   city: {
-    name: `Amsterdam`
+    location: {
+      latitude: 52.37454,
+      longitude: 4.897976,
+      zoom: 13
+    },
   },
-  title: `2Beautiful & luxurious studio at great location`,
-  premium: false,
-  type: `room`,
-  price: 70,
-  rating: 4,
-  image: ``,
-  images: [],
-  goods: [],
   host: {
-    avatar: ``,
-    name: ``
+    avatar: `img/avatar-angelina.jpg`,
+    id: 25,
+    name: `Angelina`,
+    pro: true,
+  },
+  id: 4,
+  image: `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/3.jpg`,
+  location: {
+    latitude: 52.385540000000006,
+    longitude: 4.902976,
+    zoom: 16,
   }
-}
+};
 
-
-it(`Should Offer render correctly`, () => {
+it(`Should Map render correctly`, () => {
+  const div = document.createElement(`div`);
+  div.id = `map`;
+  document.body.appendChild(div);
   const tree = renderer
     .create(
         <Map
           active={active}
           city={`Amsterdam`}
           offers={offers}
+          createMap={() => {}}
         />
     ).toJSON();
 

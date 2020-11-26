@@ -23,7 +23,7 @@ export const ActionCreator = {
     type: ActionType.CHANGE_SORT,
     payload: sort
   }),
-  onHoverOffer: (active) => ({
+  activateOffer: (active) => ({
     type: ActionType.HOVER_OFFER,
     payload: active
   }),

@@ -20,7 +20,7 @@ const ListOffers = (props) => {
           offer={item}
           activeClass={`cities__place-card`}
           onOfferClick={onOfferClick}
-          activeHover={true}
+          activeOffer={true}
         />
       )}
     </div>

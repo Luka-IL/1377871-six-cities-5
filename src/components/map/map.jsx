@@ -1,12 +1,10 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import leaflet from "leaflet";
-import "leaflet/dist/leaflet.css";
 import {connect} from "react-redux";
 import {getOffersInCity} from "../../offers";
 
-
-class Map extends React.Component {
+class Map extends PureComponent {
   constructor(props) {
     super(props);
 
