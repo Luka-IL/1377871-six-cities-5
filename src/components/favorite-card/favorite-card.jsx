@@ -3,12 +3,13 @@ import PropTypes from "prop-types";
 
 
 export const FavoriteCard = (props) => {
-  const {offer, onOfferClick} = props;
+  const {offer, onOfferClick, changeCity} = props;
   const {id, city, price, image, rating, type, title} = offer;
 
   const onOfferCardClick = (evt) => {
     evt.preventDefault();
     onOfferClick(`/offer/${id}`);
+    changeCity(city.name);
   };
 
   return (
@@ -59,6 +60,7 @@ export const FavoriteCard = (props) => {
 
 FavoriteCard.propTypes = {
   onOfferClick: PropTypes.func.isRequired,
+  changeCity: PropTypes.func.isRequired,
   offer: PropTypes.shape({
     id: PropTypes.number.isRequired,
     city: PropTypes.object.isRequired,

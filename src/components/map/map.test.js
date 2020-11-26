@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {Main} from "./main";
+import {Map} from "./map";
 
 const offers = [
   {
@@ -41,17 +41,32 @@ const offers = [
   }
 ];
 
-jest.mock(`../map/map`, () => `Map`);
-jest.mock(`../header/header`, () => `Header`);
-jest.mock(`../list-cities/list-cities`, () => `ListCities`);
-jest.mock(`../cities-places/cities-places`, () => `CitiesPlaces`);
+const active = {
+  id: 1,
+  city: {
+    name: `Amsterdam`
+  },
+  title: `2Beautiful & luxurious studio at great location`,
+  premium: false,
+  type: `room`,
+  price: 70,
+  rating: 4,
+  image: ``,
+  images: [],
+  goods: [],
+  host: {
+    avatar: ``,
+    name: ``
+  }
+}
 
 
-it(`Should Main render correctly`, () => {
+it(`Should Offer render correctly`, () => {
   const tree = renderer
     .create(
-        <Main
-          onOfferClick={() => {}}
+        <Map
+          active={active}
+          city={`Amsterdam`}
           offers={offers}
         />
     ).toJSON();

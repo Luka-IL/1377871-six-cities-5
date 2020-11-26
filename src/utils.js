@@ -62,13 +62,21 @@ export const adaptOffersToClient = (offers) => {
           favorite: offer.is_favorite,
           premium: offer.is_premium,
           guests: offer.max_adults,
-          image: offer.preview_image
+          image: offer.preview_image,
+          host: {
+            avatar: offer.host.avatar_url,
+            pro: offer.host.is_pro,
+            name: offer.host.name,
+            id: offer.host.id,
+          }
         }
     );
     delete adaptdOffer.is_favorite;
     delete adaptdOffer.max_adults;
     delete adaptdOffer.preview_image;
     delete adaptdOffer.is_premium;
+    delete adaptdOffer.host.is_pro;
+    delete adaptdOffer.host.avatar_url;
 
     return adaptdOffer;
   });

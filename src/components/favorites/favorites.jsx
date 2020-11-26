@@ -3,10 +3,11 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {FavoriteCard} from "../favorite-card/favorite-card";
 import Header from "../header/header";
+import {ActionCreator} from "../../store/action"
 
 const Favorites = (props) => {
 
-  const {offers, onOfferClick} = props;
+  const {offers, onOfferClick, changeCity} = props;
   const favoriteOffers = offers.filter((item) => (item.favorite));
 
   return (
@@ -23,6 +24,7 @@ const Favorites = (props) => {
                     onOfferClick={onOfferClick}
                     offer={item}
                     key={i}
+                    changeCity={changeCity}
                   />
                 ))}
               </ul>
@@ -49,6 +51,7 @@ const Favorites = (props) => {
 
 Favorites.propTypes = {
   onOfferClick: PropTypes.func.isRequired,
+  changeCity: PropTypes.func.isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
@@ -62,5 +65,12 @@ const mapStateToProps = ({DATA}) => ({
   offers: DATA.offers,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  changeCity(city) {
+    dispatch(ActionCreator.changeCity(city));
+  }
+});
+
+
 export {Favorites};
-export default connect(mapStateToProps)(Favorites);
+export default connect(mapStateToProps, mapDispatchToProps)(Favorites);

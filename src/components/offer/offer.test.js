@@ -1,113 +1,64 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Offer from "./offer";
-import configureStore from "redux-mock-store";
-import {Provider} from "react-redux";
+import {Offer} from "./offer";
 
-const mockStore = configureStore([]);
+const offers = [
+  {
+    id: 1,
+    city: {
+      name: `Amsterdam`
+    },
+    title: `1Beautiful & luxurious studio at great location`,
+    premium: false,
+    type: `apartment`,
+    price: 20,
+    rating: 4,
+    image: ``,
+    images: [],
+    goods: [],
+    host: {
+      avatar: ``,
+      name: ``
+    }
 
-const AVATAR_URL = `https://api.adorable.io/avatars`;
-
-const store = mockStore({
-  USER: {
-    authorizationStatus: `AUTH`
-  },
-  STATE: {
-    comments: [
-      {
-        user: {
-          name: `Max`,
-          avatar: `${AVATAR_URL}/2}`
-        },
-        description: `Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, ipsum dolor sit amet`,
-        rating: 4,
-        date: `April 2019`
-      }, {
-        user: {
-          name: `Lora`,
-          avatar: `${AVATAR_URL}/3}`
-        },
-        description: `Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, ipsum dolor sit amet`,
-        rating: 3,
-        date: `Mart 2018`
-      }
-    ]
-  },
-  DATA: {
-    offers: [{
-      pictures: [
-        `http://farm66.static.flickr.com/65535/50440663037_e00f7f6e12_b.jpg`,
-        `http://farm66.static.flickr.com/65535/50440663037_e00f7f6e12_b.jpg`,
-        `http://farm66.static.flickr.com/65535/50440663037_e00f7f6e12_b.jpg`,
-        `http://farm66.static.flickr.com/65535/50440663037_e00f7f6e12_b.jpg`,
-        `http://farm66.static.flickr.com/65535/50440663037_e00f7f6e12_b.jpg`,
-        `http://farm66.static.flickr.com/65535/50440663037_e00f7f6e12_b.jpg`
-      ],
-      title: `1Beautiful & luxurious studio at great location`,
-      description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua`,
-      premium: false,
-      type: `apartment`,
-      rating: 5,
-      bedrooms: 3,
-      users: 4,
-      price: 20,
-      households: [
-        `WiFi`, `Heating`, `Kitchen`, `Cable TV`
-      ],
-      owner: {
-        avatar: `${AVATAR_URL}/3}`,
-        name: `Karl`,
-        super: true
-      },
-      coordinates: [
-        52.3909553944608, 4.85309666408176
-      ],
-    }],
-    neighbours: [{
-      pictures: [
-        `http://farm66.static.flickr.com/65535/50440663037_e00f7f6e12_b.jpg`,
-        `http://farm66.static.flickr.com/65535/50440663037_e00f7f6e12_b.jpg`,
-        `http://farm66.static.flickr.com/65535/50440663037_e00f7f6e12_b.jpg`,
-        `http://farm66.static.flickr.com/65535/50440663037_e00f7f6e12_b.jpg`,
-        `http://farm66.static.flickr.com/65535/50440663037_e00f7f6e12_b.jpg`,
-        `http://farm66.static.flickr.com/65535/50440663037_e00f7f6e12_b.jpg`
-      ],
-      title: `1Beautiful & luxurious studio at great location`,
-      description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua`,
-      premium: false,
-      type: `apartment`,
-      rating: 5,
-      bedrooms: 3,
-      users: 4,
-      price: 20,
-      households: [
-        `WiFi`, `Heating`, `Kitchen`, `Cable TV`
-      ],
-      owner: {
-        avatar: `${AVATAR_URL}/3}`,
-        name: `Karl`,
-        super: true
-      },
-      coordinates: [
-        52.3909553944608, 4.85309666408176
-      ],
-    }]
+  }, {
+    id: 1,
+    city: {
+      name: `Amsterdam`
+    },
+    title: `2Beautiful & luxurious studio at great location`,
+    premium: false,
+    type: `room`,
+    price: 70,
+    rating: 4,
+    image: ``,
+    images: [],
+    goods: [],
+    host: {
+      avatar: ``,
+      name: ``
+    }
   }
-});
-
+];
 jest.mock(`../map/map`, () => `Map`);
 jest.mock(`../list-neighbours/list-neighbours`, () => `ListNeighbours`);
+jest.mock(`../header/header`, () => `Header`);
+jest.mock(`../list-reviews/list-reviews`, () => `ListReviews`);
 
 
 it(`Should Offer render correctly`, () => {
   const tree = renderer
     .create(
-        <Provider store={store}>
-          <Offer
-            onMainClick={() => {}}
-            onOfferClick={() => {}}
-          />
-        </Provider>
+        <Offer
+          onMainClick={() => {}}
+          onOfferClick={() => {}}
+          loadNeighbourhoods={() => {}}
+          loadComments={() => {}}
+          changeFavoriteState={() => {}}
+          loadFavoritesList={() => {}}
+          id={1}
+          offers={offers}
+        />
     ).toJSON();
 
   expect(tree).toMatchSnapshot();

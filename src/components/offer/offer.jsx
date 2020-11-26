@@ -1,4 +1,4 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import ListReviews from "../list-reviews/list-reviews";
 import Map from "../map/map";
@@ -9,17 +9,16 @@ import Header from "../header/header";
 import {fetchCommentsList, changeFavoriteStatus, fetchNeighbourhoodsList, fetchFavoriteList} from "../../store/api-action";
 
 
-class Offer extends React.Component {
+class Offer extends PureComponent {
   constructor(props) {
     super(props);
-    const {id, loadNeighbourhoods} = this.props;
-    loadNeighbourhoods(id);
     this.onClickFavorite = this.onClickFavorite.bind(this);
+    const {id, loadNeighbourhoods, loadComments} = this.props;
+    this.newId = id;
+    loadComments(id);
+    loadNeighbourhoods(id);
   }
 
-  componentDidMount() {
-    this.props.loadComments(this.props.id);
-  }
 
   onClickFavorite(evt) {
     evt.preventDefault();
@@ -31,7 +30,14 @@ class Offer extends React.Component {
   }
 
   render() {
-    const {onOfferClick, id, comments, neighbourhoods, offers} = this.props;
+    const {onOfferClick, loadComments, loadNeighbourhoods, comments, neighbourhoods, offers, id} = this.props;
+
+    if (this.newId !== id) {
+      loadComments(id);
+      loadNeighbourhoods(id);
+      this.newId = id;
+    }
+
     this.offer = offers.filter((item) => item.id === Number(id))[0];
     const {title, rating, type, bedrooms, guests, price, goods, host, images, premium} = this.offer;
     return (
