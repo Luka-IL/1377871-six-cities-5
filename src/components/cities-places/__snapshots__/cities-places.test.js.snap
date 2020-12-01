@@ -27,7 +27,7 @@ exports[`Should CitiesPlaces render correctly 1`] = `
       Sort by
     </span>
     <select
-      className="places__sorting-type"
+      className="places__option places__options--custom places__sorting-type"
       id="places-sorting"
       onChange={[Function]}
     >

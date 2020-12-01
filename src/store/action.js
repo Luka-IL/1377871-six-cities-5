@@ -11,7 +11,7 @@ export const ActionType = {
   ADD_AUTHORIZATION_DATA: `ADD_AUTHORIZATION_DATA`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
   LOAD_FAVORITES: `LOAD_FAVORITES`,
-  LOAD_NEIGHBOURHOODS: `LOAD_NEIGHBOURHOODS`
+  LOAD_NEIGHBORHOODS: `LOAD_NEIGHBORHOODS`
 };
 
 export const ActionCreator = {
@@ -49,10 +49,10 @@ export const ActionCreator = {
   }),
   loadFavorites: (favorites) => ({
     type: ActionType.LOAD_FAVORITES,
-    payload: favorites,
+    payload: adaptOffersToClient(favorites),
   }),
-  loadNeighbourhoods: (neighbourhoods) => ({
-    type: ActionType.LOAD_NEIGHBOURHOODS,
-    payload: adaptOffersToClient(neighbourhoods),
+  loadNeighborhoods: (neighborhoods) => ({
+    type: ActionType.LOAD_NEIGHBORHOODS,
+    payload: adaptOffersToClient(neighborhoods),
   })
 };

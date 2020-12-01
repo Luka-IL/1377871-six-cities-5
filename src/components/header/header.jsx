@@ -3,6 +3,7 @@ import {ActionCreator} from "../../store/action";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {onClickSingIn} from "../../utils";
+import {AppRoute} from "../../const";
 
 const Header = (props) => {
   const {email, authorizationStatus, redirectToRoute} = props;
@@ -10,7 +11,7 @@ const Header = (props) => {
 
   const onMainClick = (evt) => {
     evt.preventDefault();
-    redirectToRoute(`/main`);
+    redirectToRoute(AppRoute.ROOT);
   };
 
   const onClickOnUser = (evt) => {

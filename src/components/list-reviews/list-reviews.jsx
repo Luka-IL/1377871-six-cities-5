@@ -5,14 +5,16 @@ import {Reviews} from "../reviews-form/reviews-form";
 import {connect} from "react-redux";
 import {postComment} from "../../store/api-action";
 import {commentsSort} from "../../utils";
-import withReviewsForm from "../../hock/with-reviews-form/with-reviews-form";
+import withReviewsForm from "../../hocs/with-reviews-form/with-reviews-form";
+import {AuthorizationStatus} from "../../const";
+import {PropTypesComments} from "../../proptypes";
 
 const ReviewsForm = withReviewsForm(Reviews);
 
 const ListReviews = (props) => {
 
   const {comments, email, postCommentOnServer, id, authorizationStatus} = props;
-  const maxComments = 10;
+  const MAX_COMMENTS = 10;
   const sortComments = commentsSort(comments);
 
   return (
@@ -20,7 +22,7 @@ const ListReviews = (props) => {
       <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{comments.length}</span></h2>
       <ul className="reviews__list">
         {sortComments.map((item, i) => {
-          while (i < maxComments) {
+          while (i < MAX_COMMENTS) {
             return <Review
               key={`review-${i}`}
               review={item}
@@ -31,7 +33,7 @@ const ListReviews = (props) => {
         )
         }
       </ul>
-      {(authorizationStatus === `AUTH`) ?
+      {(authorizationStatus === AuthorizationStatus.AUTH) ?
         <ReviewsForm
           email={email}
           postComment={postCommentOnServer}
@@ -46,7 +48,7 @@ const ListReviews = (props) => {
 
 ListReviews.propTypes = {
   id: PropTypes.string.isRequired,
-  comments: PropTypes.array.isRequired,
+  comments: PropTypesComments,
   email: PropTypes.string,
   postCommentOnServer: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.string

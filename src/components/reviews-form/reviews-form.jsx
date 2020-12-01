@@ -60,5 +60,4 @@ Reviews.propTypes = {
   comment: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
   isSubmitDisabled: PropTypes.bool.isRequired,
-
 };

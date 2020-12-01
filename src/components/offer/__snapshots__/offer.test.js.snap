@@ -39,7 +39,7 @@ exports[`Should Offer render correctly 1`] = `
               type="button"
             >
               <svg
-                className="property__bookmark-icon"
+                className="place-card__bookmark-icon"
                 height="33"
                 width="31"
               >
@@ -196,7 +196,7 @@ exports[`Should Offer render correctly 1`] = `
         <h2
           className="near-places__title"
         >
-          Other places in the neighbourhood
+          Other places in the neighborhood
         </h2>
         <ListNeighbours
           onOfferClick={[Function]}

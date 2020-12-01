@@ -3,7 +3,6 @@
 exports[`Should FavoriteCard render correctly 1`] = `
 <li
   className="favorites__locations-items"
-  onClick={[Function]}
 >
   <div
     className="favorites__locations locations locations--current"
@@ -13,7 +12,7 @@ exports[`Should FavoriteCard render correctly 1`] = `
     >
       <a
         className="locations__item-link"
-        href="#"
+        onClick={[Function]}
       >
         <span>
           Amsterdam
@@ -29,6 +28,7 @@ exports[`Should FavoriteCard render correctly 1`] = `
     >
       <div
         className="favorites__image-wrapper place-card__image-wrapper"
+        onClick={[Function]}
       >
         <a
           href="#"
@@ -64,12 +64,13 @@ exports[`Should FavoriteCard render correctly 1`] = `
             </span>
           </div>
           <button
-            className="place-card__bookmark-button place-card__bookmark-button--active button"
+            className="place-card__bookmark-button button"
             type="button"
           >
             <svg
               className="place-card__bookmark-icon"
               height="19"
+              onClick={[Function]}
               width="18"
             >
               <use
@@ -79,7 +80,7 @@ exports[`Should FavoriteCard render correctly 1`] = `
             <span
               className="visually-hidden"
             >
-              In bookmarks
+              To bookmarks
             </span>
           </button>
         </div>
@@ -105,6 +106,7 @@ exports[`Should FavoriteCard render correctly 1`] = `
         </div>
         <h2
           className="place-card__name"
+          onClick={[Function]}
         >
           <a
             href="#"

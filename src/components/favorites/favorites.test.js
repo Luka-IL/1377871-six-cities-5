@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Favorites from "./favorites";
+import {Favorites} from "./favorites";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 
@@ -12,8 +12,11 @@ const store = mockStore({
   },
   DATA: {
     city: `Amsterdam`,
-    offers: [
+    favorites: [
       {
+        city: {
+          name: `Amsterdam`
+        },
         title: `1Beautiful & luxurious studio at great location`,
         premium: false,
         type: `apartment`,
@@ -21,6 +24,9 @@ const store = mockStore({
         rating: 4,
         image: ``
       }, {
+        city: {
+          name: `Amsterdam`
+        },
         title: `2Beautiful & luxurious studio at great location`,
         premium: false,
         type: `room`,
@@ -30,6 +36,9 @@ const store = mockStore({
       }
     ],
     active: {
+      city: {
+        name: `Amsterdam`
+      },
       title: `2Beautiful & luxurious studio at great location`,
       premium: false,
       type: `room`,
@@ -41,11 +50,41 @@ const store = mockStore({
     sort: `popular`
   }
 });
+const favorites = [
+  {
+    city: {
+      name: `Amsterdam`
+    },
+    title: `1Beautiful & luxurious studio at great location`,
+    premium: false,
+    type: `apartment`,
+    price: 20,
+    rating: 4,
+    image: ``
+  }, {
+    city: {
+      name: `Amsterdam`
+    },
+    title: `2Beautiful & luxurious studio at great location`,
+    premium: false,
+    type: `room`,
+    price: 70,
+    rating: 4,
+    image: ``
+  }
+];
+
 it(`Should Favorites render correctly`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <Favorites />
+          <Favorites
+            favorites={favorites}
+            onOfferClick={() => {}}
+            changeCity={() => {}}
+            redirect={() => {}}
+            activateOffer={() => {}}
+          />
         </Provider>
     ).toJSON();
 

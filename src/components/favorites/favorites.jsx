@@ -3,29 +3,29 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {FavoriteCard} from "../favorite-card/favorite-card";
 import Header from "../header/header";
-import {ActionCreator} from "../../store/action"
+import {ActionCreator} from "../../store/action";
+import {PropTypesOffer} from "../../proptypes";
 
 const Favorites = (props) => {
 
-  const {offers, onOfferClick, changeCity, activateOffer} = props;
-  const favoriteOffers = offers.filter((item) => (item.favorite));
-
+  const {favorites, onOfferClick, changeCity, activateOffer, redirect} = props;
   return (
     <div className="page">
       <Header />
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
-          {(favoriteOffers.length > 0) ?
+          {(favorites.length > 0) ?
             <section className="favorites">
               <h1 className="favorites__title">Saved listing</h1>
               <ul className="favorites__list">
-                {favoriteOffers.map((item, i) => (
+                {favorites.map((item, i) => (
                   <FavoriteCard
                     activateOffer={activateOffer}
                     onOfferClick={onOfferClick}
                     offer={item}
                     key={i}
                     changeCity={changeCity}
+                    redirectMain={redirect}
                   />
                 ))}
               </ul>
@@ -53,26 +53,24 @@ const Favorites = (props) => {
 Favorites.propTypes = {
   onOfferClick: PropTypes.func.isRequired,
   changeCity: PropTypes.func.isRequired,
+  redirect: PropTypes.func.isRequired,
   activateOffer: PropTypes.func.isRequired,
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
-  }))
+  favorites: PropTypes.arrayOf(PropTypesOffer),
 };
 
 const mapStateToProps = ({DATA}) => ({
-  offers: DATA.offers,
+  favorites: DATA.favorites,
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  redirect(url) {
+    dispatch(ActionCreator.redirectToRoute(url));
+  },
   changeCity(city) {
     dispatch(ActionCreator.changeCity(city));
   },
   activateOffer(offer) {
-    dispatch(ActionCreator.activateOffer(offer))
+    dispatch(ActionCreator.activateOffer(offer));
   }
 });
 

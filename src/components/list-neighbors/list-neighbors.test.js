@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import ListNeighbours from "./list-neighbours";
+import ListNeighbours from "./list-neighbors";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 
@@ -45,7 +45,7 @@ it(`Should ListNeighbours render correctly`, () => {
     .create((
       <Provider store={store}>
         <ListNeighbours
-          neighbourhoods={offers}
+          neighborhoods={offers}
           onOfferClick={() => {}}
         >
           <React.Fragment />

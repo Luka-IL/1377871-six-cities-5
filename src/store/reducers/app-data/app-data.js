@@ -1,12 +1,12 @@
 import {extend} from "../../../utils";
 import {ActionType} from "../../action";
-import {cities} from "../../../const";
+import {Cities} from "../../../const";
 
 const initialState = {
-  city: cities.AMSTERDAM,
+  city: Cities.AMSTERDAM,
   offers: [],
   favorites: [],
-  neighbourhoods: []
+  neighborhoods: []
 };
 
 const appData = (state = initialState, action) => {
@@ -23,9 +23,9 @@ const appData = (state = initialState, action) => {
       return extend(state, {
         favorites: action.payload
       });
-    case ActionType.LOAD_NEIGHBOURHOODS:
+    case ActionType.LOAD_NEIGHBORHOODS:
       return extend(state, {
-        neighbourhoods: action.payload
+        neighborhoods: action.payload
       });
   }
   return state;

@@ -1,4 +1,4 @@
-import {sortName} from "./const";
+import {SortName} from "./const";
 
 
 export const extend = (a, b) => {
@@ -10,7 +10,7 @@ export const randomNumber = Math.floor(Math.random() * Math.floor(100));
 
 export const offersSort = (offers, type) => {
   switch (type) {
-    case sortName.TO_HIGH:
+    case SortName.TO_HIGH:
       return offers.sort((a, b) => {
         if (a.price > b.price) {
           return 1;
@@ -20,7 +20,7 @@ export const offersSort = (offers, type) => {
         }
         return 0;
       });
-    case sortName.TO_LOW:
+    case SortName.TO_LOW:
       return offers.sort((a, b) => {
         if (a.price < b.price) {
           return 1;
@@ -30,12 +30,12 @@ export const offersSort = (offers, type) => {
         }
         return 0;
       });
-    case sortName.TOP_RATED:
+    case SortName.TOP_RATED:
       return offers.sort((a, b) => {
-        if (a.rating > b.rating) {
-          return 1;
-        }
         if (a.rating < b.rating) {
+          return 1;
+        }
+        if (a.rating > b.rating) {
           return -1;
         }
         return 0;
@@ -54,8 +54,8 @@ export const commentsSort = (comments) => comments.sort((a, b) => {
 });
 
 export const adaptOffersToClient = (offers) => {
-  const adaptdOffers = offers.map((offer) => {
-    const adaptdOffer = Object.assign(
+  const adaptOffers = offers.map((offer) => {
+    const adaptOffer = Object.assign(
         {},
         offer,
         {
@@ -71,16 +71,16 @@ export const adaptOffersToClient = (offers) => {
           }
         }
     );
-    delete adaptdOffer.is_favorite;
-    delete adaptdOffer.max_adults;
-    delete adaptdOffer.preview_image;
-    delete adaptdOffer.is_premium;
-    delete adaptdOffer.host.is_pro;
-    delete adaptdOffer.host.avatar_url;
+    delete adaptOffer.is_favorite;
+    delete adaptOffer.max_adults;
+    delete adaptOffer.preview_image;
+    delete adaptOffer.is_premium;
+    delete adaptOffer.host.is_pro;
+    delete adaptOffer.host.avatar_url;
 
-    return adaptdOffer;
+    return adaptOffer;
   });
-  return adaptdOffers;
+  return adaptOffers;
 };
 
 export const adaptCommentToClient = (comments) => {
@@ -127,21 +127,10 @@ export const onClickSingIn = (status, redirect) => {
   if (status === `AUTH`) {
     redirect(`/favorites`);
   } else {
-    redirect(`/`);
+    redirect(`/login`);
   }
 };
-/*
-export const getLocationCity = (city) => {
-  switch (city) {
-    case cities.AMSTERDAM:
-      return {
-        name: cities.AMSTERDAM,
-        location: [52.37454, 4.897976]
-      };
-    case cities.BRUSSELS:
-      return {
-        name: cities.AMSTERDAM,
-        location: [52.37454, 4.897976]
-      };
-  }
-}*/
+
+export const getOffersInCity = (offers, city) => {
+  return offers.filter((item) => (item.city.name === city));
+};

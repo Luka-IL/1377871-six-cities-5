@@ -26,3 +26,12 @@ it(`Reducer should update active offer by hover offer`, () => {
     active: {},
   });
 });
+
+it(`Reducer should update comments by load comments`, () => {
+  expect(appState({}, {
+    type: ActionType.LOAD_COMMENTS,
+    payload: [],
+  })).toEqual({
+    comments: [],
+  });
+});
