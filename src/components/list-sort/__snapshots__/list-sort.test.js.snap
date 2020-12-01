@@ -2,7 +2,7 @@
 
 exports[`Should ListSort render correctly 1`] = `
 <select
-  className="places__sorting-type"
+  className="places__option places__options--custom places__sorting-type"
   id="places-sorting"
   onChange={[Function]}
 >

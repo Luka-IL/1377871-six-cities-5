@@ -49,4 +49,18 @@ describe(`Action creators work correctly`, () => {
       payload: `sss`
     });
   });
+
+  it(`Action creator creator return correct load favorites`, () => {
+    expect(ActionCreator.loadFavorites([])).toEqual({
+      type: ActionType.LOAD_FAVORITES,
+      payload: []
+    });
+  });
+
+  it(`Action creator creator return correct load neighborhoods`, () => {
+    expect(ActionCreator.loadNeighborhoods([])).toEqual({
+      type: ActionType.LOAD_NEIGHBORHOODS,
+      payload: []
+    });
+  });
 });

@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import OfferCard from "../offer-card/offer-card";
 import {offersSort} from "../../utils";
 import {connect} from "react-redux";
-import {getOffersInCity} from "../../offers";
+import {getOffersInCity} from "../../utils";
+import {PropTypesOffer} from "../../proptypes";
 
 
 const ListOffers = (props) => {
@@ -28,7 +29,7 @@ const ListOffers = (props) => {
 };
 
 ListOffers.propTypes = {
-  offers: PropTypes.array.isRequired,
+  offers: PropTypes.arrayOf(PropTypesOffer),
   onOfferClick: PropTypes.func.isRequired,
   sort: PropTypes.string.isRequired,
   city: PropTypes.string.isRequired,

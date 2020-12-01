@@ -6,6 +6,7 @@ import Favorites from "../favorites/favorites";
 import {Router as BrowserRouter, Switch, Route} from "react-router-dom";
 import PrivateRoute from "../private-route/private-route";
 import browserHistory from "../../browser-history";
+import {AppRoute} from "../../const";
 
 
 const App = () => {
@@ -14,14 +15,14 @@ const App = () => {
     <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact
-          path="/"
+          path={AppRoute.LOGIN}
           render={() => (
             <Login
             />
           )}>
         </Route>
         <Route exact
-          path="/main"
+          path={AppRoute.ROOT}
           render={({history}) => (
             <Main
               onOfferClick={(url) => history.push(url)}
@@ -30,7 +31,7 @@ const App = () => {
         </Route>
         <PrivateRoute
           exact
-          path="/favorites"
+          path={AppRoute.FAVORITES}
           render={({history}) => {
             return (
               <Favorites
@@ -40,11 +41,11 @@ const App = () => {
           }}
         />
         <Route exact
-          path="/offer/:id"
+          path={`${AppRoute.OFFER}/:id`}
           render={({history, match}) => (
             <Offer
               id={match.params.id}
-              onMainClick={() => history.push(`/main`)}
+              onMainClick={() => history.push(AppRoute.ROOT)}
               onOfferClick={(url) => history.push(url)}
             />
           )}>

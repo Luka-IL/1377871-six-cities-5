@@ -7,7 +7,7 @@ import {ActionCreator} from "../../store/action";
 const ListCities = (props) => {
 
   const {changeCity} = props;
-  const cities = [`Amsterdam`, `Paris`, `Cologne`, `Brussels`, `Hamburg`, `Dusseldorf`];
+  const CITIES = [`Amsterdam`, `Paris`, `Cologne`, `Brussels`, `Hamburg`, `Dusseldorf`];
 
 
   const cityClickHandler = (evt) => {
@@ -17,9 +17,9 @@ const ListCities = (props) => {
 
   return (
     <ul className="locations__list tabs__list">
-      {cities.map((item, i) => (
+      {CITIES.map((item, i) => (
         <li key={`city-${i}`} className="locations__item">
-          <a className="locations__item-link tabs__item" href="#" id={item} onClick={cityClickHandler}>
+          <a className={`locations__item-link tabs__item ${props.city === item ? `tabs__item--active` : ``}`} href="#" id={item} onClick={cityClickHandler}>
             {item}
           </a>
         </li>
@@ -29,8 +29,13 @@ const ListCities = (props) => {
 };
 
 ListCities.propTypes = {
-  changeCity: PropTypes.func.isRequired
+  changeCity: PropTypes.func.isRequired,
+  city: PropTypes.string.isRequired,
 };
+
+const mapStateToProps = ({DATA}) => ({
+  city: DATA.city
+});
 
 const mapDispatchToProps = (dispatch) => ({
   changeCity(city) {
@@ -39,4 +44,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {ListCities};
-export default connect(null, mapDispatchToProps)(ListCities);
+export default connect(mapStateToProps, mapDispatchToProps)(ListCities);

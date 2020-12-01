@@ -55,7 +55,7 @@ const offer = {
 };
 
 jest.mock(`../map/map`, () => `Map`);
-jest.mock(`../list-neighbours/list-neighbours`, () => `ListNeighbours`);
+jest.mock(`../list-neighbors/list-neighbors`, () => `ListNeighbours`);
 
 it(`Click by main link calls callback`, () => {
   const handleOfferClick = jest.fn();

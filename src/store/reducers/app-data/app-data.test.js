@@ -11,7 +11,7 @@ it(`Reducer without additional parameters should return initial state`, () => {
     city: `Amsterdam`,
     offers: [],
     favorites: [],
-    neighbourhoods: []
+    neighborhoods: []
   });
 });
 
@@ -32,6 +32,24 @@ it(`Reducer should update offers by change city`, () => {
     payload: `Amsterdam`
   })).toEqual({
     city: `Amsterdam`
+  });
+});
+
+it(`Reducer should update offers by load favorites`, () => {
+  expect(appData({}, {
+    type: ActionType.LOAD_FAVORITES,
+    payload: []
+  })).toEqual({
+    favorites: []
+  });
+});
+
+it(`Reducer should update offers by load neighborhoods`, () => {
+  expect(appData({}, {
+    type: ActionType.LOAD_NEIGHBORHOODS,
+    payload: []
+  })).toEqual({
+    neighborhoods: []
   });
 });
 

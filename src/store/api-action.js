@@ -17,9 +17,9 @@ export const fetchFavoriteList = () => (dispatch, _getState, api) => (
     .then(({data}) => dispatch(ActionCreator.loadFavorites(data)))
 );
 
-export const fetchNeighbourhoodsList = (id) => (dispatch, _getState, api) => (
+export const fetchNeighborhoodsList = (id) => (dispatch, _getState, api) => (
   api.get(`/hotels/${id}/nearby`)
-  .then(({data}) => dispatch(ActionCreator.loadNeighbourhoods(data)))
+  .then(({data}) => dispatch(ActionCreator.loadNeighborhoods(data)))
 
 );
 
@@ -42,5 +42,5 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
   api.post(`/login`, {email, password})
     .then(() => dispatch(ActionCreator.addAuthorizationData(email)))
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
-    .then(() => dispatch(ActionCreator.redirectToRoute(`/main`)))
+    .then(() => dispatch(ActionCreator.redirectToRoute(`/`)))
 );

@@ -1,14 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import OfferCard from "../offer-card/offer-card";
+import {PropTypesOffer} from "../../proptypes";
 
 export const ListNeighbours = (props) => {
 
-  const {neighbourhoods, onOfferClick} = props;
+  const {neighborhoods, onOfferClick} = props;
 
   return (
     <div className={`near-places__list places__list tabs__content`}>
-      {neighbourhoods.map((item, i) =>
+      {neighborhoods.map((item, i) =>
         <OfferCard
           key={`card-${i}`}
           offer={item}
@@ -22,7 +23,7 @@ export const ListNeighbours = (props) => {
 };
 
 ListNeighbours.propTypes = {
-  neighbourhoods: PropTypes.array.isRequired,
+  neighborhoods: PropTypes.arrayOf(PropTypesOffer),
   onOfferClick: PropTypes.func.isRequired,
 };
 

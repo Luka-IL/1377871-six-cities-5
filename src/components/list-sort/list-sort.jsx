@@ -12,7 +12,7 @@ const ListSort = (props) => {
   };
 
   return (
-    <select className="places__sorting-type" id="places-sorting" onChange={getSortValue}>
+    <select className="places__option places__options--custom places__sorting-type" id="places-sorting" onChange={getSortValue}>
       <option className="places__option" value="popular">Popular</option>
       <option className="places__option" value="to-high">Price: low to high</option>
       <option className="places__option" value="to-low">Price: high to low</option>

@@ -2,44 +2,37 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import ListReviews from "../list-reviews/list-reviews";
 import Map from "../map/map";
-import ListNeighbours from "../list-neighbours/list-neighbours";
+import ListNeighbors from "../list-neighbors/list-neighbors";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../store/action";
 import Header from "../header/header";
-import {fetchCommentsList, changeFavoriteStatus, fetchNeighbourhoodsList, fetchFavoriteList} from "../../store/api-action";
+import FavoriteButtonComponent from "../favorite-button-offer/favorite-button-offer";
+import {fetchCommentsList, changeFavoriteStatus, fetchNeighborhoodsList} from "../../store/api-action";
+import withFavoriteButton from "../../hocs/with-favorite-button/with-favorite-button";
+import {PropTypesOffer, PropTypesComments} from "../../proptypes";
 
+const FavoriteButton = withFavoriteButton(FavoriteButtonComponent);
 
 class Offer extends PureComponent {
   constructor(props) {
     super(props);
-    this.onClickFavorite = this.onClickFavorite.bind(this);
-    const {id, loadNeighbourhoods, loadComments} = this.props;
+
+    const {id, loadNeighborhoods, loadComments} = this.props;
     this.newId = id;
     loadComments(id);
-    loadNeighbourhoods(id);
-  }
-
-
-  onClickFavorite(evt) {
-    evt.preventDefault();
-    const {changeFavoriteState, loadFavoritesList, id} = this.props;
-    const favoriteStatus = () => this.offer.favorite ? `0` : `1`;
-    this.offer.favorite = !this.offer.favorite;
-    changeFavoriteState(id, favoriteStatus());
-    loadFavoritesList();
+    loadNeighborhoods(id);
   }
 
   render() {
-    const {onOfferClick, loadComments, loadNeighbourhoods, comments, neighbourhoods, offers, id} = this.props;
+    const {onOfferClick, loadComments, loadNeighborhoods, comments, neighborhoods, offers, id} = this.props;
 
     if (this.newId !== id) {
       loadComments(id);
-      loadNeighbourhoods(id);
+      loadNeighborhoods(id);
       this.newId = id;
     }
 
     this.offer = offers.filter((item) => item.id === Number(id))[0];
-    const {title, rating, type, bedrooms, guests, price, goods, host, images, premium} = this.offer;
+    const {title, rating, type, bedrooms, guests, price, goods, favorite, host, images, premium} = this.offer;
     return (
       <div className="page">
         <Header />
@@ -65,16 +58,14 @@ class Offer extends PureComponent {
                   <h1 className="property__name">
                     {title}
                   </h1>
-                  <button className="property__bookmark-button button" type="button" onClick={this.onClickFavorite}>
-                    <svg className="property__bookmark-icon" width="31" height="33">
-                      <use xlinkHref="#icon-bookmark"></use>
-                    </svg>
-                    <span className="visually-hidden">To bookmarks</span>
-                  </button>
+                  <FavoriteButton
+                    favorite={favorite}
+                    id={Number(id)}
+                  />
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
-                    <span style={{width: (rating * 20) + `%`}}></span>
+                    <span style={{width: (Math.round(rating) * 20) + `%`}}></span>
                     <span className="visually-hidden">Rating</span>
                   </div>
                   <span className="property__rating-value rating__value">{rating}</span>
@@ -131,15 +122,15 @@ class Offer extends PureComponent {
             </div>
             <section className="cities__map map" style={{width: 40 + `em`, height: 20 + `em`, margin: `auto`}}>
               <Map
-                offers={neighbourhoods}
+                offers={neighborhoods}
               />
             </section>
           </section>
           <div className="container">
             <section className="near-places places">
-              <h2 className="near-places__title">Other places in the neighbourhood</h2>
-              <ListNeighbours
-                neighbourhoods={neighbourhoods}
+              <h2 className="near-places__title">Other places in the neighborhood</h2>
+              <ListNeighbors
+                neighborhoods={neighborhoods}
                 onOfferClick={onOfferClick}
               />
             </section>
@@ -151,50 +142,22 @@ class Offer extends PureComponent {
 }
 
 Offer.propTypes = {
-  comments: PropTypes.arrayOf(PropTypes.shape({
-    guest: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      avatar: PropTypes.string.isRequired
-    }),
-    comment: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    date: PropTypes.string.isRequired,
-  })),
-  neighbourhoods: PropTypes.array.isRequired,
+  comments: PropTypesComments,
+  neighborhoods: PropTypes.arrayOf(PropTypesOffer),
   email: PropTypes.string,
-  loadNeighbourhoods: PropTypes.func.isRequired,
-  redirectToRoute: PropTypes.func.isRequired,
+  loadNeighborhoods: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.string,
   changeFavoriteState: PropTypes.func.isRequired,
-  loadFavoritesList: PropTypes.func.isRequired,
   loadComments: PropTypes.func.isRequired,
   onMainClick: PropTypes.func.isRequired,
   onOfferClick: PropTypes.func.isRequired,
-  offers: PropTypes.array.isRequired,
+  offers: PropTypes.arrayOf(PropTypesOffer),
   id: PropTypes.string.isRequired,
-  offer: PropTypes.shape({
-    pictures: PropTypes.array.isRequired,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    premium: PropTypes.bool.isRequired,
-    favorite: PropTypes.bool.isRequired,
-    type: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    guests: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired,
-    goods: PropTypes.array.isRequired,
-    host: PropTypes.shape({
-      avatar: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      super: PropTypes.bool.isRequired,
-    })
-  })
 };
 
 const mapStateToProps = ({DATA, STATE, USER}) => ({
   offers: DATA.offers,
-  neighbourhoods: DATA.neighbourhoods,
+  neighborhoods: DATA.neighborhoods,
   comments: STATE.comments,
   authorizationStatus: USER.authorizationStatus
 });
@@ -204,16 +167,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(changeFavoriteStatus(id, status));
   },
 
-  loadNeighbourhoods(id) {
-    dispatch(fetchNeighbourhoodsList(id));
-  },
-
-  loadFavoritesList() {
-    dispatch(fetchFavoriteList());
-  },
-
-  redirectToRoute(url) {
-    dispatch(ActionCreator.redirectToRoute(url));
+  loadNeighborhoods(id) {
+    dispatch(fetchNeighborhoodsList(id));
   },
 
   loadComments(id) {

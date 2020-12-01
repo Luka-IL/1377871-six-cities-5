@@ -6,6 +6,7 @@ import ListCities from "../list-cities/list-cities";
 import {MainEmpty} from "../main-empty/main-empty";
 import {connect} from "react-redux";
 import Header from "../header/header";
+import {PropTypesOffer} from "../../proptypes";
 
 const Main = (props) => {
 
@@ -48,7 +49,7 @@ const Main = (props) => {
 
 Main.propTypes = {
   onOfferClick: PropTypes.func.isRequired,
-  offers: PropTypes.array.isRequired,
+  offers: PropTypes.arrayOf(PropTypesOffer),
 };
 
 const mapStateToProps = ({DATA}) => ({

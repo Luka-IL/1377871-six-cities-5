@@ -2,18 +2,21 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
-import {changeFavoriteStatus, fetchFavoriteList} from "../../store/api-action";
-
+import withFavoriteButton from "../../hocs/with-favorite-button/with-favorite-button";
+import FavoriteButtonComponent from "../favorite-button-offer-card/favorite-button-offer-card";
+import {AppRoute} from "../../const";
+import {PropTypesOffer} from "../../proptypes";
 
 const OfferCard = (props) => {
+  const FavoriteButton = withFavoriteButton(FavoriteButtonComponent);
 
-  const {offer, onOfferClick, activateOffer, activeClass, activeOffer, redirectToRoute, changeFavoriteState, loadFavoritesList, authorizationStatus} = props;
-  const {price, title, rating, type, premium, image, id} = offer;
+  const {offer, onOfferClick, activateOffer, activeClass, activeOffer} = props;
+  const {price, title, rating, type, premium, image, id, favorite} = offer;
 
   const onClick = (evt) => {
     evt.preventDefault();
     activateOffer(offer);
-    onOfferClick(`/offer/${id}`);
+    onOfferClick(`${AppRoute.OFFER}/${id}`);
   };
   const onMouseOut = (evt) => {
     evt.preventDefault();
@@ -22,17 +25,6 @@ const OfferCard = (props) => {
   const onMouseOver = (evt) => {
     evt.preventDefault();
     activateOffer(offer);
-  };
-  const onClickFavorite = (evt) => {
-    evt.preventDefault();
-    if (authorizationStatus !== `AUTH`) {
-      redirectToRoute(`/`);
-      return;
-    }
-    const favoriteStatus = () => offer.favorite ? `0` : `1`;
-    changeFavoriteState(id, favoriteStatus());
-    loadFavoritesList();
-    offer.favorite = !offer.favorite;
   };
 
   return (
@@ -56,16 +48,14 @@ const OfferCard = (props) => {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button button" type="button">
-            <svg className="place-card__bookmark-icon" width="18" height="19" onClick={onClickFavorite}>
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">To bookmarks</span>
-          </button>
+          <FavoriteButton
+            favorite={favorite}
+            id={id}
+          />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: (20 * rating) + `%`}}></span>
+            <span style={{width: (20 * Math.round(rating)) + `%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
@@ -80,21 +70,8 @@ const OfferCard = (props) => {
 };
 
 OfferCard.propTypes = {
-  offer: PropTypes.shape({
-    favorite: PropTypes.bool.isRequired,
-    image: PropTypes.string.isRequired,
-    premium: PropTypes.bool.isRequired,
-    title: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    id: PropTypes.number.isRequired,
-
-  }),
-  redirectToRoute: PropTypes.func.isRequired,
+  offer: PropTypesOffer,
   authorizationStatus: PropTypes.string.isRequired,
-  changeFavoriteState: PropTypes.func.isRequired,
-  loadFavoritesList: PropTypes.func.isRequired,
   activeOffer: PropTypes.bool.isRequired,
   activateOffer: PropTypes.func.isRequired,
   onOfferClick: PropTypes.func.isRequired,
@@ -106,19 +83,8 @@ const mapStateToProps = ({USER}) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  redirectToRoute(url) {
-    dispatch(ActionCreator.redirectToRoute(url));
-  },
   activateOffer(offer) {
     dispatch(ActionCreator.activateOffer(offer));
-  },
-
-  changeFavoriteState(id, status) {
-    dispatch(changeFavoriteStatus(id, status));
-  },
-
-  loadFavoritesList() {
-    dispatch(fetchFavoriteList());
   },
 });
 

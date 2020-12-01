@@ -1,9 +1,9 @@
 import {extend} from "../../../utils";
 import {ActionType} from "../../action";
-import {sortName} from "../../../const";
+import {SortName} from "../../../const";
 
 const initialState = {
-  sort: sortName.POPULAR,
+  sort: SortName.POPULAR,
   active: {},
   comments: []
 };
