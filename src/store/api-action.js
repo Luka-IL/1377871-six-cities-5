@@ -34,13 +34,16 @@ export const postComment = (id, comment) => (dispatch, _getState, api) => (
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(`/login`)
-    .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH)))
-    .catch(() => {})
+  .then((data) => dispatch(ActionCreator.addAuthorizationData(data.data.email)))
+  .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
+  .then(() => dispatch(fetchFavoriteList()))
+  .catch(() => {})
 );
 
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
   api.post(`/login`, {email, password})
     .then(() => dispatch(ActionCreator.addAuthorizationData(email)))
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
+    .then(() => dispatch(fetchFavoriteList()))
     .then(() => dispatch(ActionCreator.redirectToRoute(`/`)))
 );

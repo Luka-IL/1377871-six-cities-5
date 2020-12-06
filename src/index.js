@@ -8,7 +8,7 @@ import rootReducer from "./store/reducers/root-reducer";
 import thunk from "redux-thunk";
 import {createAPI} from "./services/api";
 import {ActionCreator} from "./store/action";
-import {fetchOffersList, checkAuth, fetchFavoriteList} from "./store/api-action";
+import {fetchOffersList, checkAuth} from "./store/api-action";
 import {AuthorizationStatus} from "./const";
 import {redirect} from "./store/middlewares/redirect";
 import "leaflet/dist/leaflet.css";
@@ -28,7 +28,6 @@ const store = createStore(
 Promise.all([
   store.dispatch(fetchOffersList()),
   store.dispatch(checkAuth()),
-  store.dispatch(fetchFavoriteList())
 ])
 .then(() => {
   ReactDOM.render(
